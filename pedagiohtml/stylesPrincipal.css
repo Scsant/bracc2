@@ -1,0 +1,108 @@
+body, html {
+    height: 50%;
+    margin:auto;
+    font-family: Arial, sans-serif;
+    
+    
+}
+
+.background {
+    position:absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    z-index: -1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.background-image {
+    width: 100%;
+    height: 950px;
+    object-fit: contain; /* Ajusta a imagem para cobrir toda a área */
+    max-height: 95%;
+    
+}
+
+.content {
+    position:fixed;
+    width:100%;
+    height:auto;
+    object-fit: contain;
+    max-height: 95%;
+    z-index: 1;
+    background-color: rgba(255, 255, 255, 0.9); /* Fundo branco translúcido */
+    border-radius: 10px;
+    padding: 40px;
+    width: 80%;
+    max-width: 300px;
+    text-align: left;
+    box-shadow: 0 50px 90px rgba(0, 0, 0, 0.5); /* Sombra para destaque */
+    margin:inherit; /* Centraliza o conteúdo verticalmente */
+}
+
+header {
+    margin-bottom: 20px;
+}
+
+header h1 {
+    margin: 0;
+    font-size: 2em;
+    color: #333;
+}
+
+.menu {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: left;
+    gap: 20px;
+}
+
+.menu-item {
+    background-color: white;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+    width: 250px;
+    padding: 20px;
+    text-align: center;
+}
+
+.menu-item img {
+    width: 100%;
+    height: auto;
+    border-radius: 5px;
+}
+
+.menu-item h2 {
+    margin: 10px 0;
+    font-size: 1.2em;
+    color: #333;
+}
+
+.menu-item a {
+    text-decoration: none;
+    color: black;
+    display: block;
+}
+
+.menu-item:hover {
+    transform: scale(1.05);
+}
+
+footer {
+    margin-top: 20px;
+    font-size: 0.8em;
+    color: #333;
+}
+
+h1 {
+    text-align: center;
+    
+
+
+}

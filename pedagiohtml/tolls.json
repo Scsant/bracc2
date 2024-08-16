@@ -1,0 +1,417 @@
+{
+    "BASE_PEDAGIOS":[
+    null,
+    {
+    "BASE DE VALORES DE PEDAGIOS": "06/12/2024",
+    "Column3": "ÁGUA SANTA",
+    "Column4": 86.376,
+    "Column5": 86.38,
+    "Column6": 431.88,
+    "Column7": 777.42,
+    "Column8": 8,
+    "Column9": 8
+    },
+    {
+    "BASE DE VALORES DE PEDAGIOS": "06/12/2024",
+    "Column3": "AMERICANA",
+    "Column4": 6.53,
+    "Column5": 14.44,
+    "Column6": 32.68,
+    "Column7": 130.00,
+    "Column8": 1,
+    "Column9": 2,
+    "Column10": "Essa rota, na ida o caminhão entra por Lençois e corta o pedagio de Areiopolis"
+    },
+    {
+    "BASE DE VALORES DE PEDAGIOS": "06/12/2024",
+    "Column3": "BARRA MANSA II - ACL",
+    "Column4": 67.1,
+    "Column5": 67.1,
+    "Column6": 335.5,
+    "Column7": 603.9,
+    "Column8": 9,
+    "Column9": 9
+    },
+    {
+    "BASE DE VALORES DE PEDAGIOS": "06/12/2024",
+    "Column3": "BURITIS",
+    "Column4": "SEM PEDAGIO",
+    "Column5": 16.9,
+    "Column6": 0,
+    "Column7": 152.1,
+    "Column8": 0,
+    "Column9": 2,
+    "Column10": "Essa rota, na ida não passa por nehuma praça de pedágio, na ida o caminhão vai por Borebi e na volta vem por Piratininga."
+    },
+    {
+    "BASE DE VALORES DE PEDAGIOS": "06/12/2024",
+    "Column3": "CANCHIN",
+    "Column4": 19.22,
+    "Column5": 19.22,
+    "Column6": 96.13,
+    "Column7": 172.99,
+    "Column8": 2,
+    "Column9": 2
+    },
+    {
+    "BASE DE VALORES DE PEDAGIOS": "06/12/2024",
+    "Column3": "CHAPADÃO A",
+    "Column4": 80.076,
+    "Column5": 80.08,
+    "Column6": 400.38,
+    "Column7": 720.72,
+    "Column8": 7,
+    "Column9": 7
+    },
+    {
+    "BASE DE VALORES DE PEDAGIOS": "06/12/2024",
+    "Column3": "CONQUISTA II ",
+    "Column4": 15.4,
+    "Column5": 15.4,
+    "Column6": 77,
+    "Column7": 138.6,
+    "Column8": 2,
+    "Column9": 2
+    },
+    {
+    "BASE DE VALORES DE PEDAGIOS": "06/12/2024",
+    "Column3": "CRISTO REI",
+    "Column4": 18.81,
+    "Column5": 18.82,
+    "Column6": 94.05,
+    "Column7": 169.38,
+    "Column8": 2,
+    "Column9": 2
+    },
+    {
+    "BASE DE VALORES DE PEDAGIOS": "06/12/2024",
+    "Column3": "DOIS MENINOS",
+    "Column4": 18.81,
+    "Column5": 18.82,
+    "Column6": 94.05,
+    "Column7": 169.38,
+    "Column8": 2,
+    "Column9": 2
+    },
+    {
+    "BASE DE VALORES DE PEDAGIOS": "06/12/2024",
+    "Column3": "ESPERANÇA II",
+    "Column4": 16.9,
+    "Column5": 16.9,
+    "Column6": 84.5,
+    "Column7": 152.1,
+    "Column8": 2,
+    "Column9": 2
+    },
+    {
+    "BASE DE VALORES DE PEDAGIOS": "06/12/2024",
+    "Column3": "EUROPA - RRP",
+    "Column4": 67.1,
+    "Column5": 67.1,
+    "Column6": 335.5,
+    "Column7": 603.9,
+    "Column8": 9,
+    "Column9": 9
+    },
+    {
+    "BASE DE VALORES DE PEDAGIOS": "06/12/2024",
+    "Column3": "JFI",
+    "Column4": 16.236,
+    "Column5": 24.14,
+    "Column6": 81.18,
+    "Column7": 217.3,
+    "Column8": 2,
+    "Column9": 3,
+    "Column10": "Essa rota, na ida o caminhão entra por Lençois e corta o pedagio de Areiopolis. Na volta os caminhões vem por Botucatu. Por isso a diferença de valores entre ida e volta. "
+    },
+    {
+    "BASE DE VALORES DE PEDAGIOS": "06/12/2024",
+    "Column3": "LIBERDADE III",
+    "Column4": 15.4,
+    "Column5": 15.4,
+    "Column6": 77,
+    "Column7": 138.6,
+    "Column8": 2,
+    "Column9": 2
+    },
+    {
+    "BASE DE VALORES DE PEDAGIOS": "06/12/2024",
+    "Column3": "MACEDÔNIA",
+    "Column4": 14.43,
+    "Column5": 14.44,
+    "Column6": 72.18,
+    "Column7": 130,
+    "Column8": 2,
+    "Column9": 2
+    },
+    {
+    "BASE DE VALORES DE PEDAGIOS": "06/12/2024",
+    "Column3": "MENDES-UNIÃO",
+    "Column4": "SEM PEDAGIO",
+    "Column5": "SEM PEDAGIO",
+    "Column6": 0,
+    "Column7": 0,
+    "Column8": 0,
+    "Column9": 0
+    },
+    {
+    "BASE DE VALORES DE PEDAGIOS": "06/12/2024",
+    "Column3": "ÔMEGA",
+    "Column4": 32.1,
+    "Column5": 32.1,
+    "Column6": 160.5,
+    "Column7": 288.9
+    },
+    {
+    "BASE DE VALORES DE PEDAGIOS": "06/12/2024",
+    "Column3": "PAINEIRAS",
+    "Column4": 12.63,
+    "Column5": 12.63,
+    "Column6": 63.17,
+    "Column7": 113.71
+    },
+    {
+    "BASE DE VALORES DE PEDAGIOS": "06/12/2024",
+    "Column3": "PARAÍSO IV",
+    "Column4": 22.7,
+    "Column5": 22.70,
+    "Column6": 113.5,
+    "Column7": 204.3
+    },
+    {
+    "BASE DE VALORES DE PEDAGIOS": "06/12/2024",
+    "Column3": "PEDRA PRETA",
+    "Column4": 14.9,
+    "Column5": 14.9,
+    "Column6": 74.5,
+    "Column7": 134.1
+    },
+    {
+    "BASE DE VALORES DE PEDAGIOS": "06/12/2024",
+    "Column3": "PINGO D AGUA",
+    "Column4": 32.1,
+    "Column5": 32.1,
+    "Column6": 160.5,
+    "Column7": 288.9
+    },
+    {
+    "BASE DE VALORES DE PEDAGIOS": "06/12/2024",
+    "Column3": "RADIANTE DO SÃO LUIZ",
+    "Column4": 32.1,
+    "Column5": 32.1,
+    "Column6": 160.5,
+    "Column7": 288.9
+    },
+    {
+    "BASE DE VALORES DE PEDAGIOS": "06/12/2024",
+    "Column3": "RIO CLARO",
+    "Column4": "SEM PEDAGIO",
+    "Column5": "SEM PEDAGIO",
+    "Column6": 0,
+    "Column7": 0,
+    "Column8": 0,
+    "Column9": 0
+    },
+    {
+    "BASE DE VALORES DE PEDAGIOS": "06/12/2024",
+    "Column3": "SALTO DO LONTRA",
+    "Column4": 22.45,
+    "Column5": 22.45,
+    "Column6": 112.28,
+    "Column7": 202.06,
+    "Column8": 2,
+    "Column9": 2
+    },
+    {
+    "BASE DE VALORES DE PEDAGIOS": "06/12/2024",
+    "Column3": "SANTA FLORA - GLEBA B",
+    "Column4": "SEM PEDAGIO",
+    "Column5": "SEM PEDAGIO",
+    "Column6": 0,
+    "Column7": 0,
+    "Column8": 0,
+    "Column9": 0
+    },
+    {
+    "BASE DE VALORES DE PEDAGIOS": "06/12/2024",
+    "Column3": "SANTA HELENA",
+    "Column4": 15.4,
+    "Column5": 15.4,
+    "Column6": 77,
+    "Column7": 138.6
+    },
+    {
+    "BASE DE VALORES DE PEDAGIOS": "06/12/2024",
+    "Column3": "SANTA INÊS II - AVARÉ",
+    "Column4": 6.536,
+    "Column5": 14.9,
+    "Column6": 32.68,
+    "Column7": 134.1
+    },
+    {
+    "BASE DE VALORES DE PEDAGIOS": "06/12/2024",
+    "Column3": "SANTO ANTÔNIO",
+    "Column4": 80.076,
+    "Column5": 80.08,
+    "Column6": 400.38,
+    "Column7": 720.72
+    },
+    {
+    "BASE DE VALORES DE PEDAGIOS": "06/12/2024",
+    "Column3": "SANTO ANTÔNIO VI",
+    "Column4": 18.81,
+    "Column5": 18.82,
+    "Column6": 94.05,
+    "Column7": 169.38
+    },
+    {
+    "BASE DE VALORES DE PEDAGIOS": "06/12/2024",
+    "Column3": "SÃO CRISTÓVÃO",
+    "Column4": 18.81,
+    "Column5": 18.82,
+    "Column6": 94.05,
+    "Column7": 169.38,
+    "Column8": 2,
+    "Column9": 2
+    },
+    {
+    "BASE DE VALORES DE PEDAGIOS": "06/12/2024",
+    "Column3": "SÃO JOÃO DO BELMONT",
+    "Column4": 18.81,
+    "Column5": 18.82,
+    "Column6": 94.05,
+    "Column7": 169.38
+    },
+    {
+    "BASE DE VALORES DE PEDAGIOS": "06/12/2024",
+    "Column3": "SÃO JOSÉ II",
+    "Column4": 7.6,
+    "Column5": 7.6,
+    "Column6": 38,
+    "Column7": 68.4
+    },
+    {
+    "BASE DE VALORES DE PEDAGIOS": "06/12/2024",
+    "Column3": "SÃO MANOEL II",
+    "Column4": 18.81,
+    "Column5": 18.82,
+    "Column6": 94.05,
+    "Column7": 169.38
+    },
+    {
+    "BASE DE VALORES DE PEDAGIOS": "06/12/2024",
+    "Column3": "SÃO MANOEL III",
+    "Column4": 18.81,
+    "Column5": 18.82,
+    "Column6": 94.05,
+    "Column7": 169.38
+    },
+    {
+    "BASE DE VALORES DE PEDAGIOS": "06/12/2024",
+    "Column3": "SÍTIO CANAÃ",
+    "Column4": 18.81,
+    "Column5": 18.82,
+    "Column6": 94.05,
+    "Column7": 169.38
+    },
+    {
+    "BASE DE VALORES DE PEDAGIOS": "06/12/2024",
+    "Column3": "TURVINHO I",
+    "Column4": "SEM PEDAGIO",
+    "Column5": "SEM PEDAGIO",
+    "Column6": 0,
+    "Column7": 0,
+    "Column8": 0,
+    "Column9": 0
+    },
+    {
+    "BASE DE VALORES DE PEDAGIOS": "06/12/2024",
+    "Column3": "TURVINHO II",
+    "Column4": "SEM PEDAGIO",
+    "Column5": "SEM PEDAGIO",
+    "Column6": 0,
+    "Column7": 0,
+    "Column8": 0,
+    "Column9": 0
+    },
+    {
+    "BASE DE VALORES DE PEDAGIOS": "06/13/2024",
+    "Column3": "PALMEIRAS",
+    "Column4": 16.23,
+    "Column5": 24.14,
+    "Column6": 81.18,
+    "Column7": 217.3
+    },
+    {
+    "BASE DE VALORES DE PEDAGIOS": "06/13/2024",
+    "Column3": "NOSSA SENHORA DA ESPERANÇA",
+    "Column4": 22.7,
+    "Column5": 22.7,
+    "Column6": 113.5,
+    "Column7": 204.3
+    },
+    {
+    "BASE DE VALORES DE PEDAGIOS": "06/19/2024",
+    "Column3": "QUEIXADA",
+    "Column4": 69.60,
+    "Column5": 69.60,
+    "Column6": 348.01,
+    "Column7": 626.41,
+    "Column8": 8,
+    "Column9": 8
+    },
+    {
+    "BASE DE VALORES DE PEDAGIOS": "06/19/2024",
+    "Column3": "SANTA AMÉLIA",
+    "Column4": 18.81,
+    "Column5": 18.82,
+    "Column6": 94.05,
+    "Column7": 169.38,
+    "Column8": 2,
+    "Column9": 2
+    },
+    {
+    "BASE DE VALORES DE PEDAGIOS": "06/19/2024",
+    "Column3": "SÃO JOÃO DA LAPA",
+    "Column4": 31.1,
+    "Column5": 31.1,
+    "Column6": 155.5,
+    "Column7": 279.86,
+    "Column8": 3,
+    "Column9": 3
+    },
+    {
+    "BASE DE VALORES DE PEDAGIOS": "06/19/2024",
+    "Column3": "CABREUVA",
+    "Column4": "SEM PEDAGIO",
+    "Column5": "SEM PEDAGIO",
+    "Column6": 0,
+    "Column7": 0,
+    "Column8": 0,
+    "Column9": 0
+    },
+    {
+    "BASE DE VALORES DE PEDAGIOS":"20/06/2024",
+    "Column3": "FOMENTO - TREVO III",
+    "Column4": 24.9,
+    "Column5": 24.9,
+    "Column6": 124.5,
+    "Column7": 224.1,
+    "Column8": 3,
+    "Column9": 3
+    },
+    {
+    "BASE DE VALORES DE PEDAGIOS": "24/06/2024",
+    "Column3": "SÃO BENEDITO III - SANTA MARIA DA SERRA",
+    "Column4": 7.90,
+    "Column5": 7.9,
+    "Column6": 39.5,
+    "Column7": 71.1,
+    "Column8": 1,
+    "Column9": 1  
+    }
+    ],
+    "Planilha1":[]
+   
+    }
+    
