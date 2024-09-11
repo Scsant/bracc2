@@ -81,8 +81,8 @@ library(htmlwidgets)
 
 
 # Carregar dados
-df_seguranca <- read_excel("F:/Logistica_Florestal/EQUIPE/Sócrates Luis dos Santos/Dados/Segurança_evento/001.DBControleEventos - 27.08.2024.xlsx")
-View(df_seguranca)
+df_seguranca <- read_excel("F:/Logistica_Florestal/EQUIPE/Sócrates Luis dos Santos/Dados/Segurança_evento/001.DBControleEventos - 03.09.2024.xlsx")
+
 # Agrupar e contar eventos por GERÊNCIA
 df_gerencia <- df_seguranca %>%
   group_by(`GERÊNCIA`) %>%
@@ -148,8 +148,10 @@ df_severo <- df_seguranca %>%
   group_by(SEVERIDADE, `GERÊNCIA`) %>% 
   #sumarise(contagem = n(), .groups = "drop") %>% 
   arrange(SEVERIDADE, `GERÊNCIA`)
-    
-  
+
+df_AI <- df_seguranca %>%
+  filter(`GERÊNCIA` %in% c("Transporte Madeira", "Carregamento De Madeira", "Pátio de Madeira")) %>%
+  select(`MÊS`, EMPRESA, `GERÊNCIA`, COLABORADOR, `FUNÇÃO`, SEVERIDADE, `CLASSIFICAÇÃO`, `DESCRIÇÃO`, `MÓDULO/ FRENTE DE TRABALHO`)
 
 ```
 
@@ -170,25 +172,6 @@ tags$img(src = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcROQ7UZCIUy
 ```
 #Row {data.height=50}
 ----------------------------------------------------------------------
-### ValueboxA
-
-```{r}
-renderValueBox({
-  filtered_data <- if (input$gerencia == "Todas") {
-    df_mensal
-  } else {
-    df_mensal %>% filter(GERÊNCIA == input$gerencia)
-  }
-  
-  total_ocorrencias_log <- sum(filtered_data$contagem)
-  
-  valueBox(total_ocorrencias_log, caption = "TOTAL ANO", icon = "ion-alert-circled")
-})
-
-```
-
-
-
 ### ValueboxB
 ```{r}
 
@@ -208,7 +191,7 @@ renderValueBox({
     summarise(total = sum(Total)) %>%
     .$total
 
-  valueBox(total_ocorrencias_janeiro, caption = "JAN", icon = "ion-android-alert")
+  valueBox(total_ocorrencias_janeiro, caption = "JAN")
 })
 
 
@@ -234,7 +217,7 @@ renderValueBox({
     summarise(total = sum(Total)) %>%
     .$total
 
-  valueBox(total_ocorrencias_fevereiro, caption = "FEV", icon = "ion-android-alert")
+  valueBox(total_ocorrencias_fevereiro, caption = "FEV")
 })
 
 
@@ -258,7 +241,7 @@ renderValueBox({
     summarise(total = sum(Total)) %>%
     .$total
 
-  valueBox(total_ocorrencias_marco, caption = "MAR", icon = "ion-android-alert")
+  valueBox(total_ocorrencias_marco, caption = "MAR")
 })
 
 
@@ -283,7 +266,7 @@ renderValueBox({
     summarise(total = sum(Total)) %>%
     .$total
 
-  valueBox(total_ocorrencias_abril, caption = "ABR", icon = "ion-android-alert")
+  valueBox(total_ocorrencias_abril, caption = "ABR")
 })
 
 ```
@@ -307,7 +290,7 @@ renderValueBox({
     summarise(total = sum(Total)) %>%
     .$total
 
-  valueBox(total_ocorrencias_maio, caption = "MAI", icon = "ion-android-alert")
+  valueBox(total_ocorrencias_maio, caption = "MAI")
 })
 
 ```
@@ -330,7 +313,7 @@ renderValueBox({
     summarise(total = sum(Total)) %>%
     .$total
 
-  valueBox(total_ocorrencias_junho, caption = "JUN", icon = "ion-android-alert")
+  valueBox(total_ocorrencias_junho, caption = "JUN")
 })
 
 ```
@@ -353,7 +336,7 @@ renderValueBox({
     summarise(total = sum(Total)) %>%
     .$total
 
-  valueBox(total_ocorrencias_julho, caption = "JUL", icon = "ion-android-alert")
+  valueBox(total_ocorrencias_julho, caption = "JUL")
 })
 
 ```
@@ -376,12 +359,110 @@ renderValueBox({
     summarise(total = sum(Total)) %>%
     .$total
 
-  valueBox(total_ocorrencias_agosto, caption = "AGO", icon = "ion-android-alert")
+  valueBox(total_ocorrencias_agosto, caption = "AGO")
 })
 
 ```
+### ValueboxJ
+```{r}
+renderValueBox({
+  # Filtrar os dados com base na gerência selecionada
+  filtered_data <- if (input$gerencia == "Todas") {
+    df_ocorrencias_mensais
+  } else {
+    df_seguranca %>%
+      filter(`GERÊNCIA` == input$gerencia) %>%
+      group_by(`MÊS`) %>%
+      summarise(Total = n(), .groups = "drop")
+  }
+  
+  total_ocorrencias_setembro <- filtered_data %>%
+    filter(`MÊS` == "setembro") %>%
+    summarise(total = sum(Total)) %>%
+    .$total
 
+  valueBox(total_ocorrencias_setembro, caption = "SET")
+})
+```
+### ValueboxJ
+```{r}
+renderValueBox({
+  # Filtrar os dados com base na gerência selecionada
+  filtered_data <- if (input$gerencia == "Todas") {
+    df_ocorrencias_mensais
+  } else {
+    df_seguranca %>%
+      filter(`GERÊNCIA` == input$gerencia) %>%
+      group_by(`MÊS`) %>%
+      summarise(Total = n(), .groups = "drop")
+  }
+  
+  total_ocorrencias_outubro <- filtered_data %>%
+    filter(`MÊS` == "outubro") %>%
+    summarise(total = sum(Total)) %>%
+    .$total
 
+  valueBox(total_ocorrencias_outubro, caption = "OUT")
+})
+```
+### ValueboxJ
+```{r}
+renderValueBox({
+  # Filtrar os dados com base na gerência selecionada
+  filtered_data <- if (input$gerencia == "Todas") {
+    df_ocorrencias_mensais
+  } else {
+    df_seguranca %>%
+      filter(`GERÊNCIA` == input$gerencia) %>%
+      group_by(`MÊS`) %>%
+      summarise(Total = n(), .groups = "drop")
+  }
+  
+  total_ocorrencias_novembro <- filtered_data %>%
+    filter(`MÊS` == "novembro") %>%
+    summarise(total = sum(Total)) %>%
+    .$total
+
+  valueBox(total_ocorrencias_novembro, caption = "NOV")
+})
+```
+### ValueboxJ
+```{r}
+renderValueBox({
+  # Filtrar os dados com base na gerência selecionada
+  filtered_data <- if (input$gerencia == "Todas") {
+    df_ocorrencias_mensais
+  } else {
+    df_seguranca %>%
+      filter(`GERÊNCIA` == input$gerencia) %>%
+      group_by(`MÊS`) %>%
+      summarise(Total = n(), .groups = "drop")
+  }
+  
+  total_ocorrencias_dezembro <- filtered_data %>%
+    filter(`MÊS` == "dezembro") %>%
+    summarise(total = sum(Total)) %>%
+    .$total
+
+  valueBox(total_ocorrencias_dezembro, caption = "DEZ")
+})
+```
+### ValueboxA
+
+```{r}
+renderValueBox({
+  filtered_data <- if (input$gerencia == "Todas") {
+    df_mensal
+  } else {
+    df_mensal %>% filter(GERÊNCIA == input$gerencia)
+  }
+  
+  total_ocorrencias_log <- sum(filtered_data$contagem)
+  
+  valueBox(total_ocorrencias_log, caption = "TOTAL ANO", icon = "ion-alert-circled")
+})
+
+```
 ---------------------------------------------------------
 
 Column {data-width=60}
@@ -452,6 +533,8 @@ renderPlotly({
       axis.text.y = element_text(color = "black"),
       axis.title = element_text(color = "black"),
       plot.title = element_text(color = "black"),
+      axis.title.x = element_blank(),  # Remove o nome do eixo x
+      axis.title.y = element_blank()
       #legend.background = element_rect(fill = 'white'),
       #legend.text = element_text(color = "black"),
       #legend.title = element_text(color = "black"),
@@ -473,19 +556,6 @@ Column {data-width=40}
 ### Ocorrências por Empresa
 
 ```{r}
-
-
-
-
-
-
-
-
-
-
-
-library(dplyr)
-
 
 library(dplyr)
 library(stringr)
@@ -515,9 +585,18 @@ abreviacoes <- c(
 df_empresa_filtrada_sem_bracell <- df_empresa_filtrada_sem_bracell %>%
   mutate(EMPRESA = str_replace_all(EMPRESA, abreviacoes))
 
-# Gerar o gráfico com os nomes abreviados
 renderPlotly({
-  p_bar_empresa <- ggplot(df_empresa_filtrada_sem_bracell, aes(x = reorder(EMPRESA, -contagem), y = contagem, fill = `GERÊNCIA`)) +
+  # Criação de um reativo para os dados filtrados
+  filtered_empresa_data <- reactive({
+    if (input$gerencia == "Todas") {
+      df_empresa_filtrada_sem_bracell
+    } else {
+      df_empresa_filtrada_sem_bracell %>% filter(GERÊNCIA == input$gerencia)
+    }
+  })
+
+  # Criação do gráfico de barras
+  p_bar_empresa <- ggplot(filtered_empresa_data(), aes(x = reorder(EMPRESA, -contagem), y = contagem, fill = GERÊNCIA)) +
     geom_bar(stat = "identity") +
     scale_fill_manual(values = c(
       "Transporte Madeira" = "#0047B8",
@@ -526,19 +605,28 @@ renderPlotly({
     )) +
     theme(
       axis.text.x = element_text(angle = 45, hjust = 1, color = "black"),
-      axis.text.y = element_text(color = "black"),
-      axis.title = element_text(color = "black"),
+      axis.text.y = element_text(color = "#1f1f1f"),
+      axis.title = element_text(color = "#1f1f1f"),
       plot.title = element_text(color = "black"),
       axis.title.x = element_blank(),  # Remove o nome do eixo x
-      axis.title.y = element_blank()
+      axis.title.y = element_blank(),  # Remove o nome do eixo y
+      #legend.background = element_rect(fill = "white"),
+      #legend.text = element_text(color = "black"),
+      #legend.title = element_text(color = "black"),
+      #legend.key = element_blank(), 
+      #panel.grid.major = element_blank(),
+      #panel.grid.minor = element_blank()
     )
-
-  ggplotly(p_bar_empresa) %>% layout(paper_bgcolor = 'white', plot_bgcolor = 'white')
+  
+  # Transformação para plotly com ajuste do layout
+  ggplotly(p_bar_empresa) %>%
+    layout(
+      paper_bgcolor = 'white',
+      plot_bgcolor = 'white',
+      font = list(color = 'black'),
+      legend = list(bgcolor = 'white', font = list(color = 'black'))
+    )
 })
-
-
-
-
 
 ```
 
@@ -549,22 +637,34 @@ renderPlotly({
 ```{r}
 
 renderPlotly({
-  df_severidade_filtrada <- df_severo %>%
-    filter(SEVERIDADE %in% c("MODERADO", "LEVE", "GRAVE")) %>%
-    group_by(SEVERIDADE) %>%
-    summarise(contagem = n()) %>%
-    arrange(desc(contagem))
-  
-  plot_ly(df_severidade_filtrada, labels = ~SEVERIDADE, values = ~contagem, type = 'pie',
+  # Filtrando os dados de severidade com base na gerência selecionada
+  df_severidade_filtrada <- reactive({
+    # Ajuste para filtrar os dados com base na entrada do usuário
+    if (input$gerencia == "Todas") {
+      df_severo %>%
+        filter(SEVERIDADE %in% c("MODERADO", "LEVE", "GRAVE")) %>%
+        group_by(SEVERIDADE) %>%
+        summarise(contagem = n()) %>%
+        arrange(desc(contagem))
+    } else {
+      df_severo %>%
+        filter(SEVERIDADE %in% c("MODERADO", "LEVE", "GRAVE"), GERÊNCIA == input$gerencia) %>%
+        group_by(SEVERIDADE) %>%
+        summarise(contagem = n()) %>%
+        arrange(desc(contagem))
+    }
+  })
+
+  # Gráfico de pizza com base nos dados filtrados
+  plot_ly(df_severidade_filtrada(), labels = ~SEVERIDADE, values = ~contagem, type = 'pie',
           marker = list(colors = c("Leve" = "#A4D55D", "Moderado" = "orange", "Grave" = "red"))) %>%
     layout(
-           paper_bgcolor = 'white',
-           plot_bgcolor = '#0047B8',
-           font = list(color = 'black'),
-           legend = list(bgcolor = 'white', font = list(color = 'black')))
+      paper_bgcolor = 'white',
+      plot_bgcolor = 'white',
+      font = list(color = 'black'),
+      legend = list(bgcolor = 'white', font = list(color = 'black'))
+    )
 })
-
-
 
 
 ```
@@ -576,84 +676,181 @@ Pagina 2
 ===============================================================================
 
 
-### Chart 
-
-```{r}
-
-
-renderPlotly({
-  p_linha_empresa <- ggplot(df_empresa_filtrada, aes(x = EMPRESA, y = contagem, color = `GERÊNCIA`, group = `GERÊNCIA`)) +
-    geom_line(size = 1) +
-    geom_point(size = 2) +
-    theme_minimal(base_family = "Arial", base_size = 15) +
-    labs(title = "Ocorrências por Empresa e Gerência",
-         x = "Empresa",
-         y = "Contagem de Ocorrências") +
-    theme(
-      axis.text.x = element_text(angle = 45, hjust = 1, color = "#e0e0e0"),
-      axis.text.y = element_text(color = "#e0e0e0"),
-      axis.title = element_text(color = "#e0e0e0"),
-      plot.title = element_text(color = "#e0e0e0"),
-      legend.background = element_rect(fill = "#1f1f1f"),
-      legend.text = element_text(color = "#e0e0e0"),
-      legend.title = element_text(color = "#e0e0e0")
-    )
-  
-  ggplotly(p_linha_empresa) %>% layout(paper_bgcolor = '#1f1f1f', plot_bgcolor = 'gray')
-})
-```
-
-
-### Chart 
-
-```{r}
-
-```
-
 Columns
------------------------------------------------------------------------
+----------------------------------------------------------------------
+### Data Frame Interativo
 
-### Status dos Eventos por Gerência
 ```{r}
+#install.packages("DT")
+library(DT)
+# Filtrar os dados do df_seguranca pelas gerências específicas
+# Filtrar os dados do df_seguranca pelas gerências específicas
+df_tabela <- df_seguranca %>%
+  filter(`GERÊNCIA` %in% c("Transporte Madeira", "Carregamento De Madeira", "Pátio de Madeira")) %>%
+  select(`MÊS`, EMPRESA, `GERÊNCIA`, COLABORADOR, `FUNÇÃO`, SEVERIDADE, `CLASSIFICAÇÃO`)
+
+# Renderizar a tabela com DT diretamente
+datatable(
+  df_tabela,
+  options = list(
+    pageLength = 20,
+    autoWidth = TRUE,
+    dom = 'Bfrtip',
+    buttons = c('copy', 'csv', 'excel', 'pdf', 'print'),
+    class = 'display cell-border stripe hover',
+    style = 'bootstrap',
+    rownames = FALSE
+  ),
+  extensions = c('Buttons', 'Responsive')
+) %>%
+  formatStyle(
+    columns = colnames(df_tabela),
+    backgroundColor = '#f4f4f4',  # Cor de fundo
+    color = 'black',  # Cor do texto
+    fontWeight = 'bold',  # Texto em negrito
+    borderColor = 'white',  # Cor das bordas das células
+    borderWidth = '1px'
+  )
+
+View(df_tabela)
 
 
-renderPlotly({
-  # Filtrar os dados com base na seleção de gerência
-  filtered_status_data <- if (input$gerencia == "Todas") {
-    df_rae
-  } else {
-    df_rae %>% filter(GERÊNCIA == input$gerencia)
-  }
-  
-  # Processar os dados filtrados e simplificar os nomes das gerências
-  status_data <- filtered_status_data %>%
-    group_by(GERÊNCIA, STATUS) %>%
-    summarise(contagem = n(), .groups = "drop") %>%
-    ungroup() %>%
-    mutate(GERÊNCIA = case_when(
-      GERÊNCIA == "Carregamento De Madeira" ~ "Carregamento",
-      GERÊNCIA == "Pátio de Madeira" ~ "Pátio",
-      GERÊNCIA == "Transporte Madeira" ~ "Transporte",
-      TRUE ~ GERÊNCIA  # Isso lida com outros casos, caso existam
-    ))
+```
 
-  # Gerar o gráfico de barras com os nomes simplificados
-  p_status <- ggplot(status_data, aes(x = GERÊNCIA, y = contagem, fill = STATUS)) +
-    geom_bar(stat = "identity", position = "stack") +
- 
-    theme_minimal(base_size = 14) +
-    scale_fill_manual(values = c("CONCLUÍDO" = "#A4D55D", "ATRASADO" = "red")) +
-    theme(
-      panel.grid.major = element_blank(),
-      panel.grid.minor = element_blank(),
-      axis.text.x = element_text(angle = 0, hjust = 0.5, size = 12),
-      axis.text.y = element_text(size = 12),
-      axis.title.x = element_text(margin = margin(t = 10)),
-      axis.title.y = element_text(margin = margin(r = 10))
+
+Pagina 3
+==============================================================================
+
+Perguntas e Respostas
+------------------------------------------------------------------------------
+
+### Pergunte sobre os dados de segurança
+
+```{r message=FALSE, warning=FALSE, paged.print=FALSE, echo=FALSE}
+library(shiny)
+library(httr)
+library(jsonlite)
+
+# Criação dos dataframes para a IA
+df_AI <- df_seguranca %>%
+  filter(`GERÊNCIA` %in% c("Transporte Madeira", "Carregamento De Madeira", "Pátio de Madeira")) %>%
+  select(`MÊS`, EMPRESA, `GERÊNCIA`, COLABORADOR, `FUNÇÃO`, SEVERIDADE, `CLASSIFICAÇÃO`, `DESCRIÇÃO`, `MÓDULO/ FRENTE DE TRABALHO`, `PSIF`)
+
+
+
+
+
+# Defina a chave de API (substitua no projeto final pela variável de ambiente)
+api_key <- "AIzaSyABboBNM2acdZ9N4m80ZbAVMJsEY04AJ78"
+
+# URL da API Gemini
+url <- paste0("https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent?key=", api_key)
+
+# Interface do Shiny
+ui <- fluidPage(
+  titlePanel("Pergunte à IA GOOGLE GEMINI sobre os Dados de Segurança"),
+  sidebarLayout(
+    sidebarPanel(
+      textInput("user_question", "Digite sua pergunta:", value = ""),
+      actionButton("ask_button", "Perguntar", class = "btn-primary"),
+      actionButton("clear_button", "Limpar", class = "btn-secondary"),
+      width = 4
+    ),
+    mainPanel(
+      tags$div(
+        style = "background-color: #f9f9f9; border: 1px solid #ddd; padding: 15px; border-radius: 5px; margin-top: 10px;",
+        h4("Resposta da IA:"),
+        tags$pre(
+          textOutput("response"),
+          style = "white-space: pre-wrap; word-wrap: break-word; max-height: 400px; overflow-y: auto;"
+        )
+      ),
+      width = 8
     )
+  )
+)
+
+# Servidor do Shiny
+server <- function(input, output, session) {
+  # Variável reativa para armazenar a resposta da IA
+  resposta_ia <- reactiveVal("")
   
-  ggplotly(p_status)
-})
+  observeEvent(input$ask_button, {
+    # Captura a pergunta do usuário
+    pergunta <- input$user_question
+    
+    # Contexto adicional sobre as operações de segurança da Bracell
+    contexto_extra <- "
+    A Bracell é uma das maiores produtoras de celulose solúvel do mundo, e a segurança é uma prioridade em todas as suas operações. 
+    Na logística florestal, processos como Transporte de Madeira, Carregamento de Madeira e Operações no Pátio de Madeira são críticos. 
+    As políticas de segurança incluem a classificação rigorosa de incidentes e a implementação de medidas preventivas baseadas em análises detalhadas.
+    Preciso que a IA me ajude a criar uma sinergia entre os colaboradores para conseguirmos baixar cada vez mais nossos numeros de eventos mensais.
+    Segue abaixo um resumo dos dados de segurança coletados recentemente:
+    df_AI
+    "
+    
+    # Converte os DataFrames para texto CSV
+    contexto_AI <- paste(capture.output(write.csv(df_AI, row.names = FALSE)), collapse = "\n")
+    contexto_mensal <- paste(capture.output(write.csv(df_mensal, row.names = FALSE)), collapse = "\n")
+    
+    # Monta o texto do prompt com o contexto extra e os DataFrames
+    prompt_text <- paste(
+      contexto_extra,
+      "\n\nDados de Segurança (detalhados):\n", contexto_AI,
+      "\n\nEventos de Segurança por Mês e Gerência:\n", contexto_mensal,
+      "\n\nPergunta do usuário:\n", pergunta
+    )
+    
+    # Construa o prompt para a API
+    prompt <- list(
+      contents = list(
+        list(
+          parts = list(
+            list(text = prompt_text)
+          )
+        )
+      )
+    )
+    
+    # Envie a requisição para a API Gemini
+    response <- POST(
+      url,
+      body = toJSON(prompt, auto_unbox = TRUE),
+      encode = "json",
+      add_headers(`Content-Type` = "application/json")
+    )
+    
+    # Processa a resposta da API
+    if (status_code(response) == 200) {
+      resultado <- content(response, "parsed")
+      
+      # Verifica se o conteúdo está presente
+      if (!is.null(resultado$candidates) && length(resultado$candidates) > 0) {
+        resposta_ia(resultado$candidates[[1]]$content$parts[[1]]$text) # Atualiza a resposta
+      } else {
+        resposta_ia("Resposta inesperada da API.")
+      }
+    } else {
+      # Exibe erro detalhado se ocorrer
+      erro_detalhado <- content(response, "text", encoding = "UTF-8")
+      resposta_ia(paste("Erro:", status_code(response), erro_detalhado))
+    }
+  })
+  
+  # Limpar a resposta ao clicar no botão "Limpar"
+  observeEvent(input$clear_button, {
+    resposta_ia("") # Limpa a resposta
+    updateTextInput(session, "user_question", value = "") # Opcional: Limpar também o campo de pergunta
+  })
+  
+  # Renderiza a resposta da IA
+  output$response <- renderText({
+    resposta_ia()
+  })
+}
+
+# Execute o aplicativo Shiny
+shinyApp(ui = ui, server = server)
 
 
 ```
@@ -661,36 +858,5 @@ renderPlotly({
 
 
 
-
-
-
-### Chart
-
-```{r}
-library(ggplot2)
-
-renderPlotly({
-  # Filtrar os valores da coluna SEVERIDADE
-  df_severidade_filtrada <- df_seguranca %>%
-    filter(SEVERIDADE %in% c("MODERADO", "LEVE", "GRAVE")) %>%
-    group_by(SEVERIDADE) %>%
-    summarise(contagem = n()) %>%
-    arrange(desc(contagem))
-  
-  # Verificar a estrutura do dataframe filtrado
-  print(str(df_severidade_filtrada))
-
-  # Criar o gráfico de pizza diretamente com plotly e definir as cores
-  plot_ly(df_severidade_filtrada, labels = ~SEVERIDADE, values = ~contagem, type = 'pie',
-          marker = list(colors = c("LEVE" = "#A4D55D", "MODERADO" = "orange", "GRAVE" = "red"))) %>%
-    layout(title = 'Distribuição da Severidade dos Eventos',
-           paper_bgcolor = '#1f1f1f',
-           plot_bgcolor = '#1f1f1f',
-           font = list(color = '#e0e0e0'),
-           legend = list(bgcolor = '#1f1f1f', font = list(color = '#e0e0e0')))
-})
-
-
-```
 
 
