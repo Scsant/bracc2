@@ -2,9 +2,11 @@ library(shiny)
 library(pdftools)
 library(openxlsx)
 library(shinythemes)
-#install.packages("shinythemes")
-# Função para extrair informações da página, igual ao seu script
+library(DT) # Para a tabela interativa com botões de cópia
+
+# Função para extrair informações da página
 extract_info <- function(page_text) {
+  # Seu código de extração permanece igual
   pattern_nota <- "Nº\\s*(\\d+)"
   pattern_ordem_venda <- "Ordem de Venda:\\s*(\\d+)"
   pattern_fatura <- "Fatura:\\s*-?(\\d+)"
@@ -54,15 +56,14 @@ extract_info <- function(page_text) {
 
 # Definindo a UI com tema e CSS
 ui <- fluidPage(
-  theme = shinytheme("flatly"), # Aplicando um tema do shinythemes
+  theme = shinytheme("flatly"),
   tags$head(
     tags$style(HTML("
       body {
         font-family: 'Arial', sans-serif;
-         background-color: lightgray;
       }
       .btn {
-        background-color: #0047B8; 
+        background-color: #2c3e50; 
         color: white;
         border: none;
       }
@@ -79,15 +80,14 @@ ui <- fluidPage(
     "))
   ),
   
-  # Layout da página
-  titlePanel("Extrair dados de Notas Fiscais PDF para Excel"),
+  titlePanel("Extrator de Notas Fiscais PDF para Excel"),
   sidebarLayout(
     sidebarPanel(
       fileInput("file", "Escolha o arquivo PDF", accept = ".pdf"),
       downloadButton("download", "Baixar Excel", class = "btn btn-primary")
     ),
     mainPanel(
-      tableOutput("table")
+      DTOutput("table") # Exibindo a tabela com DT para permitir cópia
     )
   )
 )
@@ -104,10 +104,18 @@ server <- function(input, output) {
     info_df
   })
   
-  output$table <- renderTable({
-    data()
+  # Renderizar a tabela interativa com botões de cópia
+  output$table <- renderDT({
+    datatable(data(),
+              extensions = 'Buttons',
+              options = list(
+                dom = 'Bfrtip',
+                buttons = c('copy', 'excel') # Botões de copiar e baixar Excel
+              ),
+              rownames = FALSE)
   })
   
+  # Download do arquivo Excel
   output$download <- downloadHandler(
     filename = function() {
       paste("notas_fiscais_", Sys.Date(), ".xlsx", sep = "")
@@ -120,3 +128,14 @@ server <- function(input, output) {
 
 # Executar o app Shiny
 shinyApp(ui = ui, server = server)
+
+install.packages("rsconnect")
+
+library(rsconnect)
+
+rsconnect::setAccountInfo(name='1ttqy8-scsant',
+                          token='C4B0223822A4F58041B4A50428B67909',
+                          secret='7OqIGl9p4yVRcNFeSZNdovIKIGMcFX8RUeU2UBbc')
+
+rsconnect::deployApp()
+
