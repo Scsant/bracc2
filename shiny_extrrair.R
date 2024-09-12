@@ -2,11 +2,11 @@ library(shiny)
 library(pdftools)
 library(openxlsx)
 library(shinythemes)
-library(DT) # Para a tabela interativa com botões de cópia
+library(DT)
 
-# Função para extrair informações da página
+# Função para extrair informações desejadas de cada página do PDF
 extract_info <- function(page_text) {
-  # Seu código de extração permanece igual
+  # Expressões regulares refinadas para buscar os padrões corretamente
   pattern_nota <- "Nº\\s*(\\d+)"
   pattern_ordem_venda <- "Ordem de Venda:\\s*(\\d+)"
   pattern_fatura <- "Fatura:\\s*-?(\\d+)"
@@ -16,32 +16,31 @@ extract_info <- function(page_text) {
   pattern_transportadora <- "CNPJ / CPF\\s+([A-Z ]+)"
   pattern_transportadora2 <- "CNPJ / CPF\\s+([A-Z ]+)"
   
-  nota <- regmatches(page_text, regexpr(pattern_nota, page_text))
-  ordem_venda <- regmatches(page_text, regexpr(pattern_ordem_venda, page_text))
-  fatura <- regmatches(page_text, regexpr(pattern_fatura, page_text))
-  remessa <- regmatches(page_text, regexpr(pattern_remessa, page_text))
+  # Extração das informações com expressões específicas
+  nota <- gsub("\\D", "", regmatches(page_text, regexpr(pattern_nota, page_text)))
+  ordem_venda <- gsub("\\D", "", regmatches(page_text, regexpr(pattern_ordem_venda, page_text)))
+  fatura <- gsub("\\D", "", regmatches(page_text, regexpr(pattern_fatura, page_text)))
+  remessa <- gsub("\\D", "", regmatches(page_text, regexpr(pattern_remessa, page_text)))
   chave_acesso <- regmatches(page_text, regexpr(pattern_chave_acesso, page_text))
   chave_acesso_alt <- regmatches(page_text, regexpr(pattern_chave_acesso_alt, page_text))
-  transportadora <- regmatches(page_text, regexpr(pattern_transportadora, page_text, perl = TRUE))
+  transportadora <- gsub("^CNPJ / CPF\\s+", "", regmatches(page_text, regexpr(pattern_transportadora, page_text, perl = TRUE)))
   transportadora2 <- regmatches(page_text, regexpr(pattern_transportadora2, page_text, perl = TRUE))
   
+  # Verifica chave de acesso alternativo se chave_acesso não foi encontrada
   if (length(chave_acesso) == 0 & length(chave_acesso_alt) > 0) {
     chave_acesso <- chave_acesso_alt
   }
   
-  nota <- ifelse(length(nota) == 0, NA, gsub("\\D", "", nota))
-  ordem_venda <- ifelse(length(ordem_venda) == 0, NA, gsub("\\D", "", ordem_venda))
-  fatura <- ifelse(length(fatura) == 0, NA, gsub("\\D", "", fatura))
-  remessa <- ifelse(length(remessa) == 0, NA, gsub("\\D", "", remessa))
+  # Garantir que cada variável tenha um valor, mesmo que seja NA
+  nota <- ifelse(length(nota) == 0, NA, sub("^0+", "", nota))
+  ordem_venda <- ifelse(length(ordem_venda) == 0, NA, sub("^0+", "", ordem_venda))
+  fatura <- ifelse(length(fatura) == 0, NA, sub("^0+", "", fatura))
+  remessa <- ifelse(length(remessa) == 0, NA, sub("^0+", "", remessa))
   chave_acesso <- ifelse(length(chave_acesso) == 0, NA, chave_acesso)
   transportadora <- ifelse(length(transportadora) == 0, NA, transportadora)
   transportadora2 <- ifelse(length(transportadora2) == 0, NA, transportadora2)
   
-  nota <- sub("^0+", "", nota)
-  ordem_venda <- sub("^0+", "", ordem_venda)
-  fatura <- sub("^0+", "", fatura)
-  remessa <- sub("^0+", "", remessa)
-  
+  # Retornar os dados extraídos em um DataFrame
   return(data.frame(
     Data = format(Sys.Date(), "%d/%m/%Y"),
     Transportadora = transportadora,
@@ -54,7 +53,7 @@ extract_info <- function(page_text) {
   ))
 }
 
-# Definindo a UI com tema e CSS
+# UI do aplicativo Shiny
 ui <- fluidPage(
   theme = shinytheme("flatly"),
   tags$head(
@@ -80,39 +79,56 @@ ui <- fluidPage(
     "))
   ),
   
-  titlePanel("Extrator de Notas Fiscais PDF para Excel"),
+
   sidebarLayout(
     sidebarPanel(
       fileInput("file", "Escolha o arquivo PDF", accept = ".pdf"),
       downloadButton("download", "Baixar Excel", class = "btn btn-primary")
     ),
     mainPanel(
-      DTOutput("table") # Exibindo a tabela com DT para permitir cópia
+      DTOutput("table")
     )
   )
 )
 
-# Definindo o Server
+# Server do aplicativo Shiny
 server <- function(input, output) {
   data <- reactive({
     req(input$file)
     pdf_text <- pdf_text(input$file$datapath)
+    
+    # Aplicar a extração em cada página do PDF
     info_list <- lapply(pdf_text, extract_info)
+    
+    # Combinar todas as informações em um único data frame
     info_df <- do.call(rbind, info_list)
-    info_df$Transportadora <- gsub("^CNPJ / CPF\\s+", "", info_df$Transportadora)
-    info_df$Transportadora2 <- gsub("^CNPJ / CPF\\s+", "", info_df$Transportadora2)
     info_df
   })
   
-  # Renderizar a tabela interativa com botões de cópia
+  # Renderizar a tabela interativa sem cabeçalhos
   output$table <- renderDT({
-    datatable(data(),
-              extensions = 'Buttons',
-              options = list(
-                dom = 'Bfrtip',
-                buttons = c('copy', 'excel') # Botões de copiar e baixar Excel
-              ),
-              rownames = FALSE)
+    datatable(
+      data(),
+      extensions = 'Buttons',
+      colnames = NULL, # Remove os cabeçalhos da tabela
+      options = list(
+        dom = 'Bfrtip',
+        buttons = list(
+          list(
+            extend = 'copyHtml5',
+            text = 'Copiar Dados',
+            exportOptions = list(
+              rows = ':visible', # Copia todas as linhas visíveis
+              columns = ':visible', # Copia todas as colunas visíveis
+              header = FALSE # Remove o cabeçalho ao copiar
+            )
+          ),
+          'excel'
+        ),
+        pageLength = -1 # Exibe todas as linhas
+      ),
+      rownames = FALSE
+    )
   })
   
   # Download do arquivo Excel
@@ -129,13 +145,8 @@ server <- function(input, output) {
 # Executar o app Shiny
 shinyApp(ui = ui, server = server)
 
-install.packages("rsconnect")
-
 library(rsconnect)
-
 rsconnect::setAccountInfo(name='1ttqy8-scsant',
-                          token='C4B0223822A4F58041B4A50428B67909',
-                          secret='7OqIGl9p4yVRcNFeSZNdovIKIGMcFX8RUeU2UBbc')
-
-rsconnect::deployApp()
-
+                          token='F66DC79DD1E42250623A188E7156C970',
+                          secret='6WrEwpOMtd2ZtU+p+DceaOvSrNEyszNNhSsY3CEy')
+rsconnect::deployApp("F:/Logistica_Florestal/EQUIPE/Sócrates Luis dos Santos/MachineLearning/ml_R/shiny_extrrair.R")
