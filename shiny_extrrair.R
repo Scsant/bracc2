@@ -79,10 +79,10 @@ ui <- fluidPage(
     "))
   ),
   
-
   sidebarLayout(
     sidebarPanel(
       fileInput("file", "Escolha o arquivo PDF", accept = ".pdf"),
+      actionButton("clear", "Apagar Dados", class = "btn btn-warning"),
       downloadButton("download", "Baixar Excel", class = "btn btn-primary")
     ),
     mainPanel(
@@ -92,8 +92,12 @@ ui <- fluidPage(
 )
 
 # Server do aplicativo Shiny
-server <- function(input, output) {
-  data <- reactive({
+server <- function(input, output, session) {
+  # Reactive value to hold the data
+  data <- reactiveVal(NULL)
+  
+  # Observa a mudança de arquivo para extrair os dados
+  observeEvent(input$file, {
     req(input$file)
     pdf_text <- pdf_text(input$file$datapath)
     
@@ -102,11 +106,12 @@ server <- function(input, output) {
     
     # Combinar todas as informações em um único data frame
     info_df <- do.call(rbind, info_list)
-    info_df
+    data(info_df)  # Atualiza o data reactive com os novos dados
   })
   
   # Renderizar a tabela interativa sem cabeçalhos
   output$table <- renderDT({
+    req(data())
     datatable(
       data(),
       extensions = 'Buttons',
@@ -131,6 +136,12 @@ server <- function(input, output) {
     )
   })
   
+  # Ação para apagar os dados carregados
+  observeEvent(input$clear, {
+    data(NULL)  # Limpa os dados da tabela
+    session$reload()  # Recarrega o aplicativo para resetar todos os estados
+  })
+  
   # Download do arquivo Excel
   output$download <- downloadHandler(
     filename = function() {
@@ -144,6 +155,7 @@ server <- function(input, output) {
 
 # Executar o app Shiny
 shinyApp(ui = ui, server = server)
+
 
 library(rsconnect)
 rsconnect::setAccountInfo(name='1ttqy8-scsant',
