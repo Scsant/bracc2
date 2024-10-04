@@ -1,0 +1,118 @@
+---
+title: "Treinamento dos motoristas"
+author: "Sócrates"
+date: "2024-10-03"
+output: html_document
+runtime: shiny
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+# Carregar pacotes necessários
+library(flexdashboard)
+library(shiny)
+library(readxl)
+library(ggplot2)
+library(plotly)
+library(dplyr)
+library(tidyr)
+library(htmlwidgets)
+
+```
+
+```{r echo=FALSE, message=FALSE, warning=FALSE, paged.print=FALSE}
+# Caminho para o arquivo Excel
+caminho_arquivo <- "F:\\Logistica_Florestal\\EQUIPE\\Sócrates Luis dos Santos\\Dados\\Segurança_evento\\dataTraining.xlsx"
+
+# Ler os dados do Excel
+dados <- read_excel(caminho_arquivo, sheet = "Sheet1")
+
+# Agrupar por supervisor e contar o número de treinamentos
+treinamentos_por_supervisor <- dados %>%
+  group_by(`Direct Manager`) %>%
+  summarise(contagem = n()) %>%
+  arrange(desc(contagem))
+
+# Gráfico de barras horizontais com rótulos e sem grade
+p_barras_supervisores <- ggplot(treinamentos_por_supervisor, aes(x = reorder(`Direct Manager`, contagem), y = contagem)) +
+  geom_bar(stat = "identity", fill = "#0047B8", color = "gray40") +  # Cor de baixa saturação
+  geom_text(aes(label = contagem), hjust = -0.1, color = "black", size = 3) +  # Rótulos de dados
+  coord_flip() +  # Gráfico horizontal
+  theme(
+    panel.background = element_rect(fill = "white"),  # Fundo branco
+    plot.background = element_rect(fill = "white"),  # Fundo do plot em branco
+    panel.grid.major = element_blank(),  # Remover grid principal
+    panel.grid.minor = element_blank(),  # Remover grid secundário
+    axis.text.x = element_text(angle = 0, color = "white"),
+    axis.text.y = element_text(color = "black"),
+    axis.title.x = element_blank(),  # Remover título do eixo X
+    axis.title.y = element_blank(),  # Remover título do eixo Y
+    plot.title = element_text(color = "black", size = 10, face = "bold")
+  ) +
+  labs(
+    
+  )
+
+# Exibir o gráfico
+print(p_barras_supervisores)
+```
+
+
+
+```{r eruptions, echo=FALSE}
+
+# Carregar pacotes
+library(readxl)  # Para leitura de arquivos Excel
+library(DT)      # Para a tabela interativa
+library(shiny) 
+
+
+# Caminho para o arquivo Excel
+caminho_arquivo <- "F:\\Logistica_Florestal\\EQUIPE\\Sócrates Luis dos Santos\\Dados\\Segurança_evento\\dataTraining.xlsx"
+
+# Ler a planilha (ajuste o nome da planilha conforme necessário)
+dados <- read_excel(caminho_arquivo, sheet = "Sheet1") 
+dados <- dados %>% 
+  select(
+    Status, 
+    Name, 
+    `Employee ID`, 
+    `Job Profile`, 
+    `Training Title`, 
+    `Direct Manager`
+    
+  )
+# Substitua "Sheet1" pelo nome da planilha
+# Renderizar a tabela com DT diretamente
+datatable(
+  dados,
+  options = list(
+    pageLength = 20,
+    autoWidth = TRUE,
+    dom = 'Bfrtip',
+    buttons = c('copy', 'csv', 'excel', 'pdf', 'print'),
+    class = 'display cell-border stripe hover',
+    style = 'bootstrap',
+    rownames = FALSE
+  ),
+  extensions = c('Buttons', 'Responsive')
+) %>%
+  formatStyle(
+    columns = colnames(dados),
+    backgroundColor = '#f4f4f4',  # Cor de fundo
+    color = 'black',  # Cor do texto
+    fontWeight = 'bold',  # Texto em negrito
+    borderColor = 'white',  # Cor das bordas das células
+    borderWidth = '1px'
+  )
+
+```
+```
+## Grafico
+
+```{r}
+
+
+
+```
+
