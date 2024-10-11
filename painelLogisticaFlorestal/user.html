@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="imagens/codificacao.ico" type="image/x-icon">
+    <title>Login</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <style>
+        /* Reset de estilo */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: url('imagens/logDall_e4.JPG') no-repeat center center fixed;
+            background-size: cover;
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .login-container {
+            background: rgba(198, 235, 204, 0.5);
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            max-width: 350px;
+            width: 100%;
+        }
+
+        h2 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .form-group input, .form-group select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        .form-group input:focus, .form-group select:focus {
+            border-color: #0066cc;
+            outline: none;
+        }
+
+        .form-group i {
+            position: absolute;
+            margin-left: -30px;
+            margin-top: 12px;
+            color: #0e4b01;
+        }
+
+        .login-container .btn {
+            width: 48%;
+            padding: 10px;
+            background-color: #01381d;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .login-container .btn:hover {
+            background-color: #00afb5;
+        }
+
+        .login-container .forgot-password {
+            text-align: center;
+            margin-top: 15px;
+        }
+
+        .login-container .forgot-password a {
+            color: #0066cc;
+            text-decoration: none;
+        }
+
+        .login-container .forgot-password a:hover {
+            text-decoration: underline;
+        }
+
+        .btn {
+            width: 48%; /* Define a largura para caber os dois botões lado a lado */
+            padding: 10px;
+            background-color: #01381d;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }    
+
+        .btn-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .error-message {
+            color: red;
+            text-align: center;
+            margin-top: 10px;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+
+    <div class="login-container">
+        <h2>Login</h2>
+        <form onsubmit="return validateLogin()">
+            <div class="form-group">
+                <i class="fas fa-user"></i>
+                <input type="text" id="username" name="username" placeholder="Usuário" required>
+            </div>
+
+            <div class="form-group">
+                <i class="fas fa-lock"></i>
+                <input type="password" id="password" name="password" placeholder="Senha" required>
+            </div>
+
+            <div class="form-group">
+                <select id="unidade">
+                    <option>Bracell - SP</option>
+                    <option>Bracell - BA</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <select id="idioma">
+                    <option>Português</option>
+                    <option>English</option>
+                </select>
+            </div>
+
+            <!-- Botões de Login e Logout lado a lado -->
+            <div class="btn-container">
+                <button type="submit" class="btn">Login</button>
+                <button type="button" class="btn" id="logoutBtn" style="display:none;">Logout</button>
+            </div>
+
+            <div class="forgot-password">
+                <p>Esqueceu sua senha? <a href="#">Clique aqui</a> para redefinir sua senha.</p>
+            </div>
+
+            <!-- Mensagem de erro -->
+            <div id="errorMessage" class="error-message">
+                Usuário ou senha incorretos. Tente novamente!
+            </div>
+        </form>
+    </div>
+
+
+    <script>
+    // Lista de usuários autorizados
+    const users = [
+        { username: "sluis", password: "123456" },
+        { username: "jalima", password: "Bracell@00" },
+        { username: "rcampos", password: "Bracell@01" },
+        { username: "mmaia", password: "Bracell@02" },
+        { username: "hsoares", password: "Bracell@03" },
+        { username: "ascarin", password: "Bracell@04" },
+        { username: "jlordelo", password: "Bracell@05" },
+        { username: "mmaia", password: "Bracell@06" },
+        { username: "alex_santos", password: "Bracell@07" },
+    ];
+
+    // Função para validar o login
+    function validateLogin() {
+        // Obtenção dos valores do nome de usuário e senha
+        var username = document.getElementById('username').value;
+        var password = document.getElementById('password').value;
+        var errorMessage = document.getElementById('errorMessage');
+
+        // Verificar se o nome de usuário e senha correspondem a algum usuário na lista
+        const user = users.find(u => u.username === username && u.password === password);
+
+        if (user) {
+            // Redireciona para a página após o login
+            window.location.href = "indexlog.html";
+            return false; // Impede o envio real do formulário
+        } else {
+            // Exibe a mensagem de erro
+            errorMessage.style.display = 'block';
+            return false; // Impede o envio do formulário
+        }
+    }
+    </script>
+
+</body>
+</html>

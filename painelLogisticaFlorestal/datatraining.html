@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Controle de Treinamentos dos Motoristas</title>
+    <link rel="stylesheet" href="css/datatraining.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.0/xlsx.full.min.js"></script>
+
+
+</head>
+<body>
+    <h1>Controle de Treinamentos dos Motoristas</h1>
+
+    <!-- Botão para exibir o gráfico -->
+    <button id="showChartBtn">Gráfico de Treinamentos em Atraso</button>
+    <!-- Barra de pesquisa -->
+    <input type="text" id="searchInput" placeholder="Digite o nome do Supervisor" oninput="filterTable()">
+
+    <!-- Botão para baixar o Excel -->
+    <button id="downloadExcelBtn">Baixar Excel</button>
+
+    <!-- Container da Tabela -->
+    <div id="tableContainer" class="table-container">
+        <table id="trainingTable">
+            <thead>
+                <tr>
+                    <th>Status</th>
+                    <th>Nome</th>
+                    <th>ID Funcionário</th>
+                    <th>Perfil de Cargo</th>
+                    <th>Título do Treinamento</th>
+                    <th>Supervisor</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Linhas serão inseridas dinamicamente aqui -->
+            </tbody>
+        </table>
+
+        <!-- Barra de Paginação -->
+        <div id="pagination" class="pagination"></div>
+    </div>
+
+    <!-- Container do Gráfico (oculto inicialmente) -->
+    <div id="chartContainer" style="display: none;">
+        <button id="backToTableBtn">Voltar para a Tabela</button>
+        <canvas id="myChart" width="1200" height="600"></canvas>
+    </div>
+
+    <script src="javaScript/datatraining.js"></script>
+</body>
+</html>

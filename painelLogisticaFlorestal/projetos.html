@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projetos</title>
+    <!-- Link para importar a fonte Poppins -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        /* Reset de estilo */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif; /* Aplicando a nova fonte */
+            background-color: rgba(183, 226, 236, 0.2); /* Fundo com transparência */
+            height: 100vh;
+            display: flex;
+            flex-direction: column; /* Ajuste para alinhar os elementos verticalmente */
+            justify-content: center;
+            align-items: center;
+        }
+
+        .header-container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            margin-bottom: 30px;
+            font-weight: 600; /* Peso da fonte para o título */
+        }
+
+        .container {
+            background-color: white; /* Mantém o contêiner com fundo opaco */
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        h2 {
+            color: #2c3e50;
+            font-size: 24px;
+            margin-bottom: 20px;
+            font-weight: 500; /* Fonte com peso médio */
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+            width: 100%;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        li {
+            margin: 10px 0;
+            padding: 15px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            justify-content: center; /* Centraliza no eixo horizontal */
+            align-items: center; /* Centraliza no eixo vertical */
+            font-size: 18px;
+            text-align: center; /* Garante que o texto fique centralizado */
+            
+        }
+
+
+        li a {
+            text-decoration: none;
+            color: inherit;
+            font-weight: bold;
+        }
+
+        li:hover {
+            background-color: #1abc9c;
+            color: white;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        li:hover a {
+            color: white;
+        }
+
+        li a {
+            color: #2980b9;
+            font-weight: 500;
+        }
+
+        li a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="header-container">
+        <h1>LOGISTICA FLORESTAL</h1>
+    </div>
+
+    <div class="container">
+        <h2>Escolha a Atividade:</h2>
+        <ul>
+            <li onclick="alert('Você escolheu Eventos de Segurança!')"><a href=" https://1ttqy8-scsant.shinyapps.io/dashr2/">Eventos de Segurança</a></li>
+            <li ><a href="datatraining.html">Treinamentos Pendentes</a></li>
+            <li onclick="alert('Você escolheu Infrações de Velocidade!')">Infrações de Velocidade</li>
+            <li onclick="alert('Você escolheu Estouro de Jornada!')"><a href="horas.html">Estouro de Jornada</a></li>
+            <li onclick="alert('Você escolheu Estouro de Jornada!')"><a href="aso.html">Controle de Exame Ocupacional (ASO)</a></li> <!-- Link para a nova página -->
+        </ul>
+    </div>
+</body>
+</html>

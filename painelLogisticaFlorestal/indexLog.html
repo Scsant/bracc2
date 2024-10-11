@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Painel da Logística</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="icon" href="imagens/bannerDash.JPG" type="image/x-icon">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+<!-- Sidebar -->
+<div class="sidebar">
+    <h2>Menu</h2> 
+    <ul>
+        <li><a href="#" onclick="loadIframe('home')"><i class="fas fa-home"></i> Home</a></li>
+        <li><a href="#" onclick="loadIframe('projetos')"><i class="fas fa-project-diagram"></i> Templates</a></li>
+        <li><a href="#" onclick="loadIframe('sobre')"><i class="fas fa-info-circle"></i> Sobre</a></li>
+        <li><a href="#"><i class="fas fa-envelope"></i> Contato</a></li>
+        <li><a href="#" onclick="loadIframe('sugestoes')"><i class="fas fa-lightbulb"></i> Sugestões</a></li> <!-- Substituído por Sugestões -->
+        <li><a href="#"><i class="fas fa-question-circle"></i> Ajuda</a></li>
+    </ul>
+</div>
+
+<!-- Conteúdo Principal -->
+<div class="main-content">
+    <h1>Monitoramento de Segurança e Performance na Logística Florestal</h1>
+    
+    <!-- Seções já existentes -->
+    <section>
+        <h2><i class="fas fa-shield-alt"></i><a href=" https://1ttqy8-scsant.shinyapps.io/dashr2/"> Eventos de Segurança</a></h2>
+        <p>Monitoramento dos imprevistos na operação para alertar os gestores e evitar acidentes futuros.</p>
+    </section>
+
+    <section>
+        <h2><i class="fas fa-chalkboard-teacher"></i><a href="datatraining.html"> Treinamentos Pendentes</a></h2>
+        <p>Lembretes automáticos sobre treinamentos pendentes dos motoristas, garantindo que todos estejam qualificados.</p>
+    </section>
+
+    <section>
+        <h2><i class="fas fa-tachometer-alt"></i> Infrações de Velocidade</h2>
+        <p>Alertas de motoristas que excederam o limite de velocidade, garantindo cumprimento das regras de trânsito.</p>
+    </section>
+
+    <section>
+        <h2><i class="fas fa-clock"></i> Estouro de Jornada</h2>
+        <p>Monitoramento do tempo de trabalho para evitar excesso de jornada, garantindo segurança nas estradas.</p>
+    </section>
+
+    <section>
+        <h2><i class="fas fa-stethoscope"></i><a href="aso.html">Controle de Exame Ocupacional (ASO)</a></h2>
+        <p>Monitoramento dos exames ocupacionais dos motoristas, garantindo que estejam aptos para trabalhar com segurança e dentro das normas de saúde.</p>
+    </section>
+
+    <!-- Overlay que cobre a tela inteira -->
+    <div id="overlay" onclick="closeIframe()"></div>
+    <!-- Iframe que será carregado -->
+    <iframe id="content-frame" src="home.html" frameborder="0"></iframe>
+    <!-- Texto de Copyright -->
+    <footer class="sidebar-footer">
+        <p>© 2024 Sócrates Luiz dos Santos</p>
+    </footer>
+</div>
+
+<script>
+    // Função para carregar páginas no iframe
+    function loadIframe(page) {
+        var iframe = document.getElementById('content-frame');
+        var overlay = document.getElementById('overlay');
+        
+        if (page === 'home') {
+            iframe.src = 'home.html'; 
+        } else if (page === 'projetos') {
+            iframe.src = 'projetos.html'; 
+        } else if (page === 'sobre') {
+            iframe.src = 'sobre.html'; 
+        } else if (page === 'sugestoes') {
+            iframe.src = 'sugestoes.html'; // Carrega a nova página de sugestões
+        }
+        
+        iframe.style.display = 'block'; 
+        overlay.style.display = 'block'; 
+    }
+
+    function closeIframe() {
+        var iframe = document.getElementById('content-frame');
+        var overlay = document.getElementById('overlay');
+        iframe.style.display = 'none'; 
+        overlay.style.display = 'none'; 
+    }
+</script>
+
+</body>
+</html>

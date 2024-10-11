@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Controle de Exame Ocupacional (ASO)</title>
+    <link rel="stylesheet" href="css/aso.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <h2>Menu</h2>
+        <button id="showChartDelayBtn">Gráfico de Quantidade de motoristas por dias de atrasos</button>
+        <button id="showChartLeaderBtn">Gráfico de Motoristas por líder imediato</button>
+        <button id="downloadExcelBtn">Baixar Excel</button>
+    </div>
+
+    <!-- Área principal -->
+    <div class="main-content">
+        <h1>Controle de Exame Ocupacional (ASO)</h1>
+
+        <!-- Barra de Pesquisa -->
+        <input type="text" id="searchInput" placeholder="Pesquisar por Líder Imediato" oninput="filterTable()">
+
+        <!-- Container da Tabela -->
+        <div id="tableContainer" class="table-container">
+            <table id="asoTable">
+                <thead>
+                    <tr>
+                        <th>ID Motorista</th>
+                        <th>ID WD</th>
+                        <th>Nome</th>
+                        <th>Total Expirado</th>
+                        <th>Expirado a mais de 60 dias</th>
+                        <th>Expirado até 60 dias</th>
+                        <th>Expirado até 30 dias</th>
+                        <th>Total de exames futuros</th>
+                        <th>Devido em menos de 30 dias</th>
+                        <th>Devido de 30 a 60 dias</th>
+                        <th>Devido em mais de 60 dias</th>
+                        <th>Líder Imediato</th>
+                        <th>Coordenador</th>
+                        <th>Gerente</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Linhas serão inseridas dinamicamente aqui -->
+                </tbody>
+            </table>
+
+            <!-- Barra de Paginação -->
+            <div id="pagination" class="pagination"></div>
+        </div>
+
+        <!-- Container do Gráfico (oculto inicialmente) -->
+        <div id="chartContainer" style="display: none;">
+            <button id="backToTableBtn">Voltar para a Tabela</button>
+            <canvas id="myChart" width="1200" height="600"></canvas>
+        </div>
+    </div>
+
+    <script src="javaScript/aso.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.0/xlsx.full.min.js"></script>
+</body>
+</html>
