@@ -98,7 +98,11 @@ h2 {
     color: #1abc9c;
     margin-right: 10px;
 }
-
+/* Links dentro das seções */
+.main-content section h2 a {
+    color: #000000; /* Cor preta para os links */
+    text-decoration: none; /* Remove o sublinhado */
+}
 .main-content section p {
     font-size: 1.1em;
     line-height: 1.6em;
@@ -211,7 +215,9 @@ h2 {
     text-align: center;
 }
 
-
+a {
+    text-decoration: none;
+}
 
 
 
@@ -274,4 +280,26 @@ li img {
 
 li img:hover {
     transform: scale(1.05);  /* Aumenta um pouco o tamanho ao passar o mouse */
+}
+
+/* Estilo do popup (tooltip) */
+.popup {
+    display: none; /* Começa escondido */
+    position: absolute;
+    background-color: #333;
+    color: #fff;
+    padding: 10px;
+    border-radius: 5px;
+    font-size: 0.9rem;
+    z-index: 1000;
+    white-space: nowrap; /* Evita quebra de linha */
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    opacity: 0; /* Invisível inicialmente */
+    transition: opacity 0.3s ease;
+}
+
+/* Faz o popup aparecer */
+.popup.show {
+    display: block;
+    opacity: 1;
 }

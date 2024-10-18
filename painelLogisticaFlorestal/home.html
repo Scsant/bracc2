@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Página Inicial</title>
+    <link rel="stylesheet" href="css/style.css"> <!-- Puxa o mesmo estilo do arquivo principal, se quiser -->
+</head>
+
+<body>
+
+    <h1>Bem-vindo ao Painel da Logística Florestal</h1>
+
+    <!-- Contêiner de imagens rotativas -->
+    <div id="imagem-container" style="text-align: center; margin-top: 320x;">
+        <img id="imagem-ativa" src="imagens/bracellImage1.jpg" alt="Imagem da Empresa" style="width: 100%; max-width: 1200px; border-radius: 8px;">
+    </div>
+
+    <script>
+        // Função para alternar entre as imagens automaticamente
+        const imagens = [
+            'imagens/bracellImage1.jpg',
+            'imagens/bracellImage2.jpg',
+            'imagens/bracellImage3.jpg',
+            'imagens/bracellImage1.jpg'
+        ];
+        
+        let indiceAtual = 0;
+        const tempoTrocaImagem = 5000;  // 5 segundos entre as trocas de imagens
+        const imagemAtiva = document.getElementById('imagem-ativa');
+        
+        // Função para alternar as imagens a cada intervalo
+        function alternarImagem() {
+            indiceAtual = (indiceAtual + 1) % imagens.length;
+            imagemAtiva.src = imagens[indiceAtual];
+        }
+        
+        // Inicia a rotação de imagens
+        setInterval(alternarImagem, tempoTrocaImagem);
+    </script>
+
+</body>
+</html>

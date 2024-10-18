@@ -15,23 +15,32 @@
     <h2>Menu</h2> 
     <ul>
         <li><a href="#" onclick="loadIframe('home')"><i class="fas fa-home"></i> Home</a></li>
-        <li><a href="#" onclick="loadIframe('projetos')"><i class="fas fa-project-diagram"></i> Templates</a></li>
+        
         <li><a href="#" onclick="loadIframe('sobre')"><i class="fas fa-info-circle"></i> Sobre</a></li>
         <li><a href="#"><i class="fas fa-envelope"></i> Contato</a></li>
         <li><a href="#" onclick="loadIframe('sugestoes')"><i class="fas fa-lightbulb"></i> Sugestões</a></li> <!-- Substituído por Sugestões -->
-        <li><a href="#"><i class="fas fa-question-circle"></i> Ajuda</a></li>
+        
     </ul>
 </div>
 
 <!-- Conteúdo Principal -->
 <div class="main-content">
     <h1>Monitoramento de Segurança e Performance na Logística Florestal</h1>
-    
+        
     <!-- Seções já existentes -->
     <section>
-        <h2><i class="fas fa-shield-alt"></i><a href=" https://1ttqy8-scsant.shinyapps.io/dashr2/"> Eventos de Segurança</a></h2>
+        <h2>
+            <i class="fas fa-shield-alt"></i>
+            <a href="https://1ttqy8-scsant.shinyapps.io/dashr2/" id="securityLink">Eventos de Segurança</a>
+        </h2>
         <p>Monitoramento dos imprevistos na operação para alertar os gestores e evitar acidentes futuros.</p>
+
+        <!-- Popup de aviso -->
+        <div id="popupAviso" class="popup">
+            ⚠️ Atualizado no dia 11/04/2024!!
+        </div>
     </section>
+
 
     <section>
         <h2><i class="fas fa-chalkboard-teacher"></i><a href="datatraining.html"> Treinamentos Pendentes</a></h2>
@@ -39,12 +48,12 @@
     </section>
 
     <section>
-        <h2><i class="fas fa-tachometer-alt"></i> Infrações de Velocidade</h2>
+        <h2><i class="fas fa-tachometer-alt"></i><a href="velocidade.html"> Infrações de Velocidade</a></h2>
         <p>Alertas de motoristas que excederam o limite de velocidade, garantindo cumprimento das regras de trânsito.</p>
     </section>
 
     <section>
-        <h2><i class="fas fa-clock"></i> Estouro de Jornada</h2>
+        <h2><i class="fas fa-clock"></i><a href="jornada.html"> Estouro de Jornada</h2>
         <p>Monitoramento do tempo de trabalho para evitar excesso de jornada, garantindo segurança nas estradas.</p>
     </section>
 
@@ -52,6 +61,8 @@
         <h2><i class="fas fa-stethoscope"></i><a href="aso.html">Controle de Exame Ocupacional (ASO)</a></h2>
         <p>Monitoramento dos exames ocupacionais dos motoristas, garantindo que estejam aptos para trabalhar com segurança e dentro das normas de saúde.</p>
     </section>
+    
+ 
 
     <!-- Overlay que cobre a tela inteira -->
     <div id="overlay" onclick="closeIframe()"></div>
@@ -89,6 +100,25 @@
         iframe.style.display = 'none'; 
         overlay.style.display = 'none'; 
     }
+    document.addEventListener('DOMContentLoaded', function () {
+    const securityLink = document.getElementById('securityLink');
+    const popupAviso = document.getElementById('popupAviso');
+
+    // Mostrar o popup ao passar o mouse
+    securityLink.addEventListener('mouseover', function (event) {
+        popupAviso.style.display = 'block'; // Exibe o popup
+        popupAviso.style.left = event.pageX + 'px'; // Posição horizontal do mouse
+        popupAviso.style.top = (event.pageY + 20) + 'px'; // Posição vertical (um pouco abaixo do mouse)
+        setTimeout(() => popupAviso.classList.add('show'), 10); // Anima a opacidade
+    });
+
+    // Esconder o popup quando o mouse sai
+    securityLink.addEventListener('mouseout', function () {
+        popupAviso.classList.remove('show'); // Remove a animação
+        setTimeout(() => popupAviso.style.display = 'none', 300); // Esconde após a transição
+    });
+});
+
 </script>
 
 </body>

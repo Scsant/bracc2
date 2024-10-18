@@ -1,30 +1,128 @@
-/* datatraining.css */
+/* Estilos Gerais */
+/* Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
 body {
     font-family: 'Poppins', sans-serif;
     background-color: rgba(183, 226, 236, 0.2);
     min-height: 100vh;
     display: flex;
+    margin: 0;
+}
+
+
+/* Sidebar */
+.sidebar {
+    width: 250px;
+    background-color: #2c3e50; /* Azul escuro */
+    position: fixed;
+    height: 100%;
+    padding: 20px;
+    display: flex;
     flex-direction: column;
     justify-content: flex-start;
-    align-items: center;
-    padding: 20px;
+    align-items: flex-start;
+    color: white;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1); /* Sombra para destacar o sidebar */
 }
 
+.sidebar h2 {
+    margin-bottom: 30px;
+    font-size: 24px; /* Fonte maior para o título */
+    font-weight: 600;
+    color: #ecf0f1; /* Cor mais clara */
+    letter-spacing: 1px; /* Espaçamento entre letras */
+}
+.sidebar button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    padding: 12px 20px;
+    margin: 10px 0;
+    font-size: 16px;
+    cursor: pointer;
+    background-color: #2c3e50; /* Cor de fundo do botão */
+    color: #ffffff; /* Cor do texto e ícone */
+    border: none;
+    border-radius: 10px; /* Bordas arredondadas */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra suave */
+    transition: background-color 0.3s, box-shadow 0.3s;
+}
+
+.sidebar button:hover {
+    background-color: #1abc9c; /* Cor mais vibrante ao passar o mouse */
+    color: white; /* Cor do texto branca */
+    transform: translateY(-3px); /* Pequeno efeito de levantar o botão */
+}
+
+.sidebar button:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(26, 188, 156, 0.5); /* Destaque ao focar */
+}
+
+
+.sidebar button.active {
+    background-color: #16a085; /* Cor diferente para o botão ativo */
+}
+
+.sidebar button i {
+    margin-right: 10px; /* Espaçamento para ícones, se forem usados */
+}
+
+
+
+/* Responsividade */
+@media screen and (max-width: 768px) {
+    .sidebar {
+        width: 100%;
+        height: auto;
+        position: relative;
+    }
+
+    .sidebar button {
+        font-size: 14px;
+    }
+}
+
+
+/* Área principal */
+.main-content {
+    margin-left: 270px;  /* Dar espaço para o sidebar */
+    padding: 20px;
+    width: calc(100% - 270px);
+}
+
+
+/* Título */
 h1 {
-    margin-top: 20px;
     color: #2c3e50;
     font-size: 28px;
-    text-align: center;
+    text-align: left;
+    margin-bottom: 20px;
 }
 
+/* Barra de Pesquisa */
+input#searchInput {
+    padding: 10px;
+    margin-bottom: 20px;
+    width: 300px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    font-size: 14px;
+}
+
+/* Tabela */
 .table-container {
-    margin-top: 30px;
     background-color: white;
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
     width: 100%;
-    max-width: 1200px;
 }
 
 table {
@@ -48,34 +146,17 @@ th {
 td {
     background-color: #f9f9f9;
     font-size: 12px;
+    word-wrap: break-word;
 }
 
-/* Estilo dos botões */
-button {
-    margin-top: 20px;
-    padding: 10px 20px;
-    font-size: 16px;
-    background-color: #0066cc;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-    display: block;
-    margin: 10px auto;
-    text-align: center;
+tbody tr:nth-child(odd) {
+    background-color: #f0f8ff;
 }
 
-button:hover {
-    background-color: #004d99;
-}
-
+/* Paginação */
 .pagination {
     margin-top: 20px;
     text-align: center;
-    display: flex;
-    justify-content: center; /* Alinhar os botões no centro */
-    flex-wrap: wrap; /* Permitir que os botões se ajustem à largura da tela */
 }
 
 .pagination button {
@@ -102,3 +183,83 @@ button:hover {
     background-color: #ddd;
     cursor: not-allowed;
 }
+
+
+/* Responsivo */
+@media screen and (max-width: 768px) {
+    .sidebar {
+        width: 100%;
+        height: auto;
+        position: relative;
+    }
+
+    .main-content {
+        margin-left: 0;
+        width: 100%;
+    }
+}
+
+/* Gráfico */
+#chartContainer {
+    margin-top: 30px;
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 1200px;
+}
+
+/* Paginação */
+.pagination {
+    margin-top: 20px;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.pagination button {
+    background-color: #0066cc;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    margin: 0 5px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.pagination button:hover {
+    background-color: #004d99;
+}
+
+.pagination button.active {
+    background-color: #004d99;
+    cursor: default;
+}
+
+.pagination button:disabled {
+    background-color: #ddd;
+    cursor: not-allowed;
+}
+
+.update-info {
+    background-color: #f8f9fa; /* Fundo claro */
+    color: #2c3e50; /* Texto azul (ou outra cor que destaque) */
+    font-size: 0.8rem; /* Tamanho de texto um pouco maior */
+    padding: 10px 15px; /* Espaçamento interno */
+    border-left: 5px solid #007bff; /* Barra lateral */
+    margin-bottom: 20px; /* Espaço abaixo */
+    display: inline-block; /* Para alinhar o conteúdo */
+    border-radius: 5px; /* Bordas arredondadas */
+}
+
+.update-info i {
+    margin-right: 5px; /* Espaçamento entre o ícone e o texto */
+}
+
+#updateDate {
+    font-weight: bold; /* Data em negrito */
+}
+

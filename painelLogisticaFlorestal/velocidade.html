@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Controle de velocidades</title>
+    <link rel="stylesheet" href="css/velocidade.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.0/xlsx.full.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <h2>Menu</h2>
+        <button id="homeBtn"><i class="fas fa-home"></i>Home</button> <!-- Botão Home -->
+        <button id="showChartBtn"><i class="fas fa-chart-bar"></i>Gráfico velocidade</button>
+        <button id="downloadExcelBtn"><i class="fas fa-file-excel"></i>Baixar Excel</button>
+    </div>
+
+    <!-- Conteúdo Principal -->
+    <div class="main-content">
+        <h1>Controle de velocidades</h1>
+            <!-- Data da Última Atualização -->
+        <div id="lastUpdate" class="update-info">
+            <i class="fas fa-sync-alt"></i> Data: <span id="updateDate">12/10 a 18/10</span>
+        </div>
+
+        <!-- Barra de pesquisa -->
+        <input type="text" id="searchInput" placeholder="Digite a BTF, ex: BTF 04" oninput="filterTable()">
+
+    
+
+        <!-- Container da Tabela -->
+        <div id="tableContainer" class="table-container">
+            <table id="trainingTable">
+                <thead>
+                    <tr>
+                        <th>Data</th>
+                        <th>Hora</th>
+                        <th>Filial</th>
+                        <th>Motorista</th>
+                        <th>Veículo</th>
+                        <th>Hodômetro (km)</th>
+                        <th>Duração (hh:mm:ss)</th>
+                        <th>Velocidade (Km/h)</th>
+                        <th>Limite (Km/h)</th>
+                        <th>Cerca Embarcada</th>
+                        <th>Ação</th>
+                        <th>Data da Ação</th>
+                        <th>Usuário da Ação</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Linhas serão inseridas dinamicamente aqui -->
+                </tbody>
+            </table>
+
+            <!-- Barra de Paginação -->
+            <div id="pagination" class="pagination"></div>
+        </div>
+
+
+        <!-- Container do Gráfico (oculto inicialmente) -->
+        <div id="chartContainer" style="display: none;">
+            <button id="backToTableBtn">Voltar para a Tabela</button>
+            <canvas id="myChart" width="1200" height="600"></canvas>
+        </div>
+
+    </div>
+
+    <script src="javaScript/velocidade.js"></script>
+</body>
+</html>

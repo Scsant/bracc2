@@ -1,3 +1,4 @@
+/* Estilos Gerais */
 /* Reset */
 * {
     margin: 0;
@@ -64,6 +65,7 @@ body {
     box-shadow: 0 0 0 3px rgba(26, 188, 156, 0.5); /* Destaque ao focar */
 }
 
+
 .sidebar button.active {
     background-color: #16a085; /* Cor diferente para o botão ativo */
 }
@@ -71,6 +73,8 @@ body {
 .sidebar button i {
     margin-right: 10px; /* Espaçamento para ícones, se forem usados */
 }
+
+
 
 /* Responsividade */
 @media screen and (max-width: 768px) {
@@ -86,13 +90,13 @@ body {
 }
 
 
-
 /* Área principal */
 .main-content {
     margin-left: 270px;  /* Dar espaço para o sidebar */
     padding: 20px;
     width: calc(100% - 270px);
 }
+
 
 /* Título */
 h1 {
@@ -149,12 +153,6 @@ tbody tr:nth-child(odd) {
     background-color: #f0f8ff;
 }
 
-tbody tr:hover {
-    background-color: #d1e7f1;
-    cursor: pointer;
-    transition: background-color 0.3s;
-}
-
 /* Paginação */
 .pagination {
     margin-top: 20px;
@@ -186,6 +184,7 @@ tbody tr:hover {
     cursor: not-allowed;
 }
 
+
 /* Responsivo */
 @media screen and (max-width: 768px) {
     .sidebar {
@@ -211,19 +210,92 @@ tbody tr:hover {
     max-width: 1200px;
 }
 
+/* Paginação */
+.pagination {
+    margin-top: 20px;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.pagination button {
+    background-color: #0066cc;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    margin: 0 5px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.pagination button:hover {
+    background-color: #004d99;
+}
+
+.pagination button.active {
+    background-color: #004d99;
+    cursor: default;
+}
+
+.pagination button:disabled {
+    background-color: #ddd;
+    cursor: not-allowed;
+}
+
+.update-info {
+    background-color: #f8f9fa; /* Fundo claro */
+    color: #2c3e50; /* Texto azul (ou outra cor que destaque) */
+    font-size: 0.8rem; /* Tamanho de texto um pouco maior */
+    padding: 10px 15px; /* Espaçamento interno */
+    border-left: 5px solid #007bff; /* Barra lateral */
+    margin-bottom: 20px; /* Espaço abaixo */
+    display: inline-block; /* Para alinhar o conteúdo */
+    border-radius: 5px; /* Bordas arredondadas */
+}
+
+.update-info i {
+    margin-right: 5px; /* Espaçamento entre o ícone e o texto */
+}
+
+#updateDate {
+    font-weight: bold; /* Data em negrito */
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#chartContainer {
+    position: relative; /* Torna o container relativo para posicionamento absoluto do botão */
+    width: 100%;
+    height: auto;
+    max-width: 1200px;
+    padding: 20px; /* Adiciona um pouco de padding ao redor do gráfico */
+}
+
+
 
 #chartContainer.show {
     display: block;
     opacity: 1;
 }
-#myChart {
-    opacity: 0;
-    transition: opacity 0.5s ease; /* Transição suave de meio segundo */
-}
 
-#myChart.show {
-    opacity: 1; /* Aplica opacidade quando visível */
-}
 
 
 .update-info {
@@ -244,3 +316,10 @@ tbody tr:hover {
 #updateDate {
     font-weight: bold; /* Data em negrito */
 }
+
+#backToTableBtn {
+    position: absolute; /* Posiciona o botão de forma absoluta dentro do container */
+
+}
+
+

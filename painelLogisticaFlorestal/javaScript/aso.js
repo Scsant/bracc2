@@ -1,7 +1,7 @@
 // aso.js
 
 let currentChart = null;
-const motoristasPorPagina = 20; // Limite de motoristas por página
+const motoristasPorPagina = 400; // Limite de motoristas por página
 let paginaAtual = 1; // Página inicial
 let totalPaginas = 1; // Total de páginas (calculado dinamicamente)
       
@@ -3481,8 +3481,7 @@ function initTable() {
     renderTable(asoData, paginaAtual);
 }
 
-// Inicializa a tabela na página 1
-initTable();        
+
 
 
 
@@ -3490,142 +3489,225 @@ initTable();
 
 // Função para gerar o gráfico de motoristas por dias de atraso
 function gerarGraficoAtraso() {
-    // Destrói o gráfico anterior, se existir
-    if (currentChart) {
-        currentChart.destroy();
-    }
+    const chartCanvas = document.getElementById('myChart');
 
-    const expiradoAte30 = asoData.filter(motorista => motorista["Expired until 30 days"]).length;
-    const expiradoAte60 = asoData.filter(motorista => motorista["Expired until 60 days"]).length;
-    const expiradoMais60 = asoData.filter(motorista => motorista["Expired more than 60 days"]).length;
-    const examesFuturos = asoData.filter(motorista => motorista["Total Upcoming Exams"]).length;
-    const devidoMenos30 = asoData.filter(motorista => motorista["Due in Less than 30 days"]).length;
-    const devido30a60 = asoData.filter(motorista => motorista["Due in 30 to 60 days"]).length;
-    const devidoMais60 = asoData.filter(motorista => motorista["Due in 60 days or more"]).length;
+    // Inicia o fade-out
+    chartCanvas.classList.remove('show');
 
-    const data = {
-        labels: [
-            'Expirado até 30 dias',
-            'Expirado até 60 dias',
-            'Expirado a mais de 60 dias',
-            'Exames Futuros',
-            'Devido em menos de 30 dias',
-            'Devido de 30 a 60 dias',
-            'Devido em mais de 60 dias'
-        ],
-        datasets: [{
-            label: 'Quantidade de Motoristas',
-            data: [expiradoAte30, expiradoAte60, expiradoMais60, examesFuturos, devidoMenos30, devido30a60, devidoMais60],
-            backgroundColor: [
-                'rgba(255, 99, 132, 0.2)',
-                'rgba(54, 162, 235, 0.2)',
-                'rgba(255, 206, 86, 0.2)',
-                'rgba(75, 192, 192, 0.2)',
-                'rgba(153, 102, 255, 0.2)',
-                'rgba(255, 159, 64, 0.2)',
-                'rgba(46, 204, 113, 0.2)'
+    // Espera a animação de fade-out antes de destruir o gráfico e gerar o novo
+    setTimeout(() => {
+        if (currentChart) {
+            currentChart.destroy(); // Destruir o gráfico anterior
+        }
+
+        // Dados do gráfico
+        const expiradoAte30 = asoData.filter(motorista => motorista["Expired until 30 days"]).length;
+        const expiradoAte60 = asoData.filter(motorista => motorista["Expired until 60 days"]).length;
+        const expiradoMais60 = asoData.filter(motorista => motorista["Expired more than 60 days"]).length;
+        const examesFuturos = asoData.filter(motorista => motorista["Total Upcoming Exams"]).length;
+        const devidoMenos30 = asoData.filter(motorista => motorista["Due in Less than 30 days"]).length;
+        const devido30a60 = asoData.filter(motorista => motorista["Due in 30 to 60 days"]).length;
+        const devidoMais60 = asoData.filter(motorista => motorista["Due in 60 days or more"]).length;
+
+        const data = {
+            labels: [
+                'Expirado até 30 dias',
+                'Expirado até 60 dias',
+                'Expirado a mais de 60 dias',
+                'Exames Futuros',
+                'Devido em menos de 30 dias',
+                'Devido de 30 a 60 dias',
+                'Devido em mais de 60 dias'
             ],
-            borderColor: [
-                'rgba(255, 99, 132, 1)',
-                'rgba(54, 162, 235, 1)',
-                'rgba(255, 206, 86, 1)',
-                'rgba(75, 192, 192, 1)',
-                'rgba(153, 102, 255, 1)',
-                'rgba(255, 159, 64, 1)',
-                'rgba(46, 204, 113, 1)'
-            ],
-            borderWidth: 1
-        }]
-    };
+            datasets: [{
+                label: 'Quantidade de Motoristas',
+                data: [expiradoAte30, expiradoAte60, expiradoMais60, examesFuturos, devidoMenos30, devido30a60, devidoMais60],
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(255, 206, 86, 0.2)',
+                    'rgba(75, 192, 192, 0.2)',
+                    'rgba(153, 102, 255, 0.2)',
+                    'rgba(255, 159, 64, 0.2)',
+                    'rgba(46, 204, 113, 0.2)'
+                ],
+                borderColor: [
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 206, 86, 1)',
+                    'rgba(75, 192, 192, 1)',
+                    'rgba(153, 102, 255, 1)',
+                    'rgba(255, 159, 64, 1)',
+                    'rgba(46, 204, 113, 1)'
+                ],
+                borderWidth: 1
+            }]
+        };
 
-    const ctx = document.getElementById('myChart').getContext('2d');
-    currentChart = new Chart(ctx, {
-        type: 'bar',
-        data: data,
-        options: {
-            scales: {
-                y: {
-                    beginAtZero: true
+        const ctx = chartCanvas.getContext('2d');
+        currentChart = new Chart(ctx, {
+            type: 'bar',
+            data: data,
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
                 }
             }
-        }
-    });
+        });
+
+        // Depois que o gráfico é atualizado, inicia o fade-in
+        setTimeout(() => {
+            chartCanvas.classList.add('show');
+        }, 10);
+    }, 500); // Tempo do fade-out
 }
-
-
 
 // Função para gerar o gráfico de motoristas por líder imediato
 function gerarGraficoLider() {
-    // Destrói o gráfico anterior, se existir
-    if (currentChart) {
-        currentChart.destroy();
-    }
+    const chartCanvas = document.getElementById('myChart');
 
-    const lideres = {};
-    
-    // Contar quantos motoristas cada líder tem
-    asoData.forEach(motorista => {
-        const lider = motorista["Immediate Leader"];
-        if (lideres[lider]) {
-            lideres[lider]++;
-        } else {
-            lideres[lider] = 1;
+    // Inicia o fade-out
+    chartCanvas.classList.remove('show');
+
+    setTimeout(() => {
+        if (currentChart) {
+            currentChart.destroy(); // Destruir o gráfico anterior
         }
-    });
 
-    // Transformar o objeto em um array e ordenar do maior para o menor
-    const sortedEntries = Object.entries(lideres).sort((a, b) => b[1] - a[1]);
+        const lideres = {};
 
-    // Separar os dados ordenados
-    const labels = sortedEntries.map(entry => entry[0]);
-    const values = sortedEntries.map(entry => entry[1]);
+        // Contar quantos motoristas cada líder tem
+        asoData.forEach(motorista => {
+            const lider = motorista["Immediate Leader"];
+            if (lideres[lider]) {
+                lideres[lider]++;
+            } else {
+                lideres[lider] = 1;
+            }
+        });
 
-    const data = {
-        labels: labels,
-        datasets: [{
-            label: 'Quantidade de Motoristas por Líder Imediato',
-            data: values,
-            backgroundColor: 'rgba(75, 192, 192, 0.2)',
-            borderColor: 'rgba(75, 192, 192, 1)',
-            borderWidth: 1
-        }]
-    };
+        const sortedEntries = Object.entries(lideres).sort((a, b) => b[1] - a[1]);
+        const labels = sortedEntries.map(entry => entry[0]);
+        const values = sortedEntries.map(entry => entry[1]);
 
-    const ctx = document.getElementById('myChart').getContext('2d');
-    currentChart = new Chart(ctx, {
-        type: 'bar',
-        data: data,
-        options: {
-            scales: {
-                y: {
-                    beginAtZero: true
+        const data = {
+            labels: labels,
+            datasets: [{
+                label: 'Quantidade de Motoristas por Líder Imediato',
+                data: values,
+                backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                borderColor: 'rgba(75, 192, 192, 1)',
+                borderWidth: 1
+            }]
+        };
+
+        const ctx = chartCanvas.getContext('2d');
+        currentChart = new Chart(ctx, {
+            type: 'bar',
+            data: data,
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
                 }
             }
-        }
-    });
+        });
+
+        // Inicia o fade-in
+        setTimeout(() => {
+            chartCanvas.classList.add('show');
+        }, 10);
+    }, 500); // Tempo do fade-out
 }
 
 
+document.getElementById("homeBtn").addEventListener("click", function() {
+    window.location.href = "indexLog.html"; // Redireciona para a página principal
+});
 
+// Função para esconder filtros e botão de Excel
+function esconderFiltrosEBotoes() {
+    document.getElementById('searchInput').style.display = 'none';  // Esconde a barra de pesquisa
+    document.getElementById('downloadExcelBtn').style.display = 'none'; // Esconde o botão de Excel
+}
 
+// Função para mostrar filtros e botão de Excel
+function mostrarFiltrosEBotoes() {
+    document.getElementById('searchInput').style.display = 'block';  // Mostra a barra de pesquisa
+    document.getElementById('downloadExcelBtn').style.display = 'block'; // Mostra o botão de Excel
+}
 
-// Alternar entre os containers
+// Função para gerar o gráfico de motoristas por dias de atraso
 document.getElementById('showChartDelayBtn').addEventListener('click', function() {
-    document.getElementById('tableContainer').style.display = 'none'; // Esconder tabela
-    document.getElementById('chartContainer').style.display = 'block'; // Mostrar gráfico
-    gerarGraficoAtraso(); // Gera o gráfico de atrasos
+    const tableContainer = document.getElementById('tableContainer');
+    const chartContainer = document.getElementById('chartContainer');
+
+    // Esconder a tabela
+    tableContainer.style.display = 'none';
+
+    // Esconder os filtros e o botão de Excel
+    esconderFiltrosEBotoes();
+
+    // Mostrar o container do gráfico com animação suave
+    chartContainer.style.display = 'block'; // Primeiro exibe o container
+    setTimeout(() => {
+        chartContainer.classList.add('show'); // Adiciona a classe 'show' para fazer a transição suave
+    }, 10);
+
+    // Gerar o gráfico de atrasos
+    gerarGraficoAtraso();
 });
 
+// Função para gerar o gráfico de motoristas por líder imediato
 document.getElementById('showChartLeaderBtn').addEventListener('click', function() {
-    document.getElementById('tableContainer').style.display = 'none'; // Esconder tabela
-    document.getElementById('chartContainer').style.display = 'block'; // Mostrar gráfico
-    gerarGraficoLider(); // Gera o gráfico de líderes imediatos
+    const tableContainer = document.getElementById('tableContainer');
+    const chartContainer = document.getElementById('chartContainer');
+
+    // Esconder a tabela
+    tableContainer.style.display = 'none';
+
+    // Esconder os filtros e o botão de Excel
+    esconderFiltrosEBotoes();
+
+    // Mostrar o container do gráfico com animação suave
+    chartContainer.style.display = 'block';
+    setTimeout(() => {
+        chartContainer.classList.add('show');
+    }, 10);
+
+    // Gerar o gráfico de líderes
+    gerarGraficoLider();
 });
 
+// Voltar para a tabela com transição suave
 document.getElementById('backToTableBtn').addEventListener('click', function() {
-    document.getElementById('chartContainer').style.display = 'none'; // Esconder gráfico
-    document.getElementById('tableContainer').style.display = 'block'; // Mostrar tabela
+    const tableContainer = document.getElementById('tableContainer');
+    const chartContainer = document.getElementById('chartContainer');
+
+    // Remover a classe 'show' para iniciar a animação de ocultação
+    chartContainer.classList.remove('show');
+
+    // Esperar a transição terminar antes de esconder o container e mostrar a tabela
+    setTimeout(() => {
+        chartContainer.style.display = 'none';
+        tableContainer.style.display = 'block';
+
+        // Mostrar os filtros e o botão de Excel de volta
+        mostrarFiltrosEBotoes();
+    }, 1000); // Tempo de transição (1s)
+});
+
+// Atualizar a data de última atualização
+document.addEventListener('DOMContentLoaded', function () {
+    // Supondo que você obtenha a data de uma fonte de dados, ou use a data atual
+    const lastUpdateDate = "16 de outubro de 2024"; // Data dinâmica, pode vir de uma API ou base de dados
+    
+    // Atualiza o texto no HTML
+    document.getElementById('updateDate').textContent = lastUpdateDate;
 });
 
 // Renderiza a tabela inicialmente
-renderTable(asoData);
+initTable();

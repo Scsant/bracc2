@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard de Eventos de Segurança</title>
+    <link rel="stylesheet" href="css/eventos.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
+</head>
+<body>
+    <div class="dashboard-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <h2>Gerência</h2>
+            <select>
+                <option value="todas">Todas</option>
+                <option value="gerencia1">Carregamento de Madeira</option>
+                <option value="gerencia2">Transporte Madeira</option>
+                <option value="gerencia3">Pátio de Madeira</option>
+            </select>
+            <img src="bracell-logo.png" alt="Bracell" class="logo">
+        </aside>
+
+        <!-- Conteúdo Principal -->
+        <div class="dashboard">
+            <!-- Caixas de resumo de eventos -->
+            <div class="summary-boxes">
+                <div class="box">Janeiro</div>
+                <div class="box">Fevereiro</div>
+                <div class="box">Março</div>
+                <div class="box">Abril</div>
+                <div class="box">Maio</div>
+                <div class="box">Junho</div>
+                <div class="box">Julho</div>
+                <div class="box">Agosto</div>
+                <div class="box">Setembro</div>
+                <div class="box">Outubro</div>
+
+            </div>
+
+            <!-- Gráficos -->
+            <div class="dashboard-content">
+                <div class="chart-container">
+                    <h3>Evolução dos Eventos por Mês (Gerências)</h3>
+                    <canvas id="lineChart"></canvas>
+                </div>
+
+                <div class="chart-container">
+                    <h3>Classificação dos Eventos por Gerência</h3>
+                    <canvas id="stackedBarChart"></canvas>
+                </div>
+
+                <div class="chart-container">
+                    <h3>Ocorrências por Empresa (Terceiros)</h3>
+                    <canvas id="horizontalBarChart"></canvas>
+                </div>
+
+                <div class="chart-container">
+                    <h3>Severidade dos Eventos</h3>
+                    <canvas id="pieChart"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="javaScript/eventos.js"></script>
+</body>
+</html>
